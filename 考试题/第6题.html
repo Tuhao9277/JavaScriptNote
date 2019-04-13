@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        
+var chance = 0.0557,i=1,
+       baoji = chance,
+       count = 0,
+       rand;
+function play(){
+      var date = new Date();
+       rand = date.getTime()%10000/10000;
+      
+        if(rand<baoji){  
+             //触发暴击//
+            count++;
+            console.log("当前第"+i+"次攻击，暴击次数"+count+"次","实际概率："+baoji);
+            baoji = chance;
+        }
+        else{
+            console.log("当前第"+i+"次攻击，暴击次数"+count+"次","实际概率："+baoji);
+            //暴击值增加
+            baoji+=chance;
+
+            //进行下一次攻击
+        }
+        i++;
+    }
+      setInterval(function(){play()},1000);
+
+
+    </script>
+</body>
+
+</html>

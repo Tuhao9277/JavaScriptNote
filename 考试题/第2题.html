@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //修改数组每个元素的大小，创建新数组保存修改后的值，不改变原数组
+        var arr = [12, 54, 8, 32];
+
+        function map(arr, num) {
+            return arr.map(function (item) {
+                return item + num;
+            })
+        }
+        console.log("原数组"+arr);
+        console.log("修改后"+map(arr, 8));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //比较对象内的属性，并按序排列
+        var list = [{ name: "王尼玛", score: 87 },
+        { name: "阿Q", score: 97 },
+        { name: "PaPi酱", score: 80 },
+        { name: "李子柒", score: 89 },
+        { name: "万项", score: 100 },
+        { name: "孙臣曦", score: 99 },
+        { name: "李显文", score: 73 },
+        { name: "郭鼎", score: 65 },
+        { name: "李冬辰", score: 88 },
+        { name: "陈涵", score: 85 }];
+
+        function compareTo(key) {
+            return function (obj1, obj2) {
+                var x = obj1[key];
+                var y = obj2[key];
+                return x - y;
+            };
+        }
+        var res = list.sort(compareTo("score"));
+
+        function avg(arr) {
+            var sum = 0;
+            for (var i = 0; i < arr.length; i++) {
+                sum += arr[i].score;
+            }
+            return (sum / arr.length);
+        }
+        var avgScore = avg(res);
+        console.log(res);
+        console.log("平均成绩：" + avgScore);
+
+    </script>
+</body>
+
+</html>
