@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //定义一个30个整型元素的数组，按顺序分别赋值从2开始的偶数，
+        // 并按顺序每五个数求一次平均值，结果放入另一个数组中并输出
+        /*
+
+        */
+
+        var arr = new Array(30),
+            b = [],
+            count = 2,
+            avg = 0,
+            sum = 0;
+
+        function saveAvg() {
+            for (let index = 0; index < arr.length; index++) {
+                arr[index] = count;
+                count += 2;
+
+            }
+            for (let index = 0; index < arr.length; index++) {
+                sum += arr[index];
+                if ((index + 1) % 5 == 0) {
+                    var avg = sum / 5;
+                    b.push(avg);
+                    sum = 0;
+                }
+            }
+            console.log(b);
+        }
+
+        /*手写join方法 思路：定义一个临时字符串，用来拼接数组元素，并与str连接
+        i到达数组最后一位时，不再与str连接
+        */
+        function join(arr, str) {
+            var temp = "";
+            for (var i = 0; i < arr.length; i++) {
+                temp += arr[i] + ((i != arr.length - 1) ? str : '');
+            }
+            return temp;
+        }
+    </script>
+</body>
+
+</html>

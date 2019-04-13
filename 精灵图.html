@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        ul .Sprites{
+            margin: 0 auto;
+            width: 300px;
+            padding: 10px;
+        }
+        ul .Sprites li{
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            overflow: hidden;
+        }
+        ul.Sprites li span{
+            float: left;
+            width: 17px;
+            height:17px;  
+            overflow: hidden;
+            background: url() no-repeat;
+        }
+        ul.Sprites li span .a1{
+            background-position: -62px -32px; /*向左偏移62 向上偏移32*/
+        }
+
+    </style>
+</head>
+<body>
+    <ul class="Sprites">
+        <li ><span class="a1"></span></li>
+        <li ><span class="a2"></span></li>
+        <li ><span class="a3"></span></li>
+        <li ><span class="a4"></span></li>
+    </ul>
+</body>
+</html>

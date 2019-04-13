@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //最大公约数 ，辗转相除法。较小数作较大数，余数作为较小数，除到余数为0为止。较大的那个数为最大公约数
+        function f(m,n){
+            var r= m%n;
+            m = n;
+            n = r;
+            if(r !=0){
+               return f(m,n);
+            }
+            return m;
+        }
+        //最小公倍数 更相减损法
+        function m(x,y){
+            if(x%2==0 && y%2==0){
+                x/=2;
+                y/=2;
+                return 2*m(x,y);
+            }else{
+                var res = Math.abs(x-y);
+                if(res == Math.min(x,y)){
+                    return res;
+                }
+                else{
+                    return m(res,Math.min(x,y));
+                }
+            }
+        }
+    </script>
+</body>
+</html>

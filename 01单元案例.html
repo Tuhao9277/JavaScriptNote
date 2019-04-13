@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function dayTime(time){
+            var day = parseInt(time/24);
+            var hour = time%24;
+            if(day>0){
+                if(hour == 0){
+                    console.log(day+'天');
+                }
+                console.log(day+'天'+hour+'小时');
+            }
+            else{
+                console.log(-1);
+            }
+        }
+
+        function transTemperature(t){
+            var degreeC = 5/9.0*(t-32);
+            console.log("摄氏度："+degreeC.toFixed(3)+"°C");
+            console.log("华氏度："+t.toFixed(3));
+        return 0;
+        }
+
+        function upMoney (money){
+            
+            for(var i =0; i<50 ; i++){
+                money*=1.05;
+            }
+            return money;
+        }
+
+    </script>
+</body>
+</html>

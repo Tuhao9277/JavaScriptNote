@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [12, 23, 435, 2, 4, 6, 7, 24];
+        /*
+        手写数组的forEach方法
+        forEach(arr,fn)
+       
+       函数b作为参数传入另一个函数a中，故不会立即执行，
+       b的执行取决于其在函数a中调用b()的位置
+       
+       
+        */
+
+        /* 冒泡排序
+            每次排好数组最后一个元素，最大的元素
+            外圈每次减少一位，内圈从头开始比较
+         */
+         function swap(arr, pre, cur) {
+                var temp = arr[pre];
+                arr[pre] = arr[cur];
+                arr[cur] = temp;
+            }
+            console.log(arr);
+
+        function bobbleSort(arr){
+        for (var i = arr.length - 1; i > 0; i--) {
+            for (var j = 0; j < i; j++) {
+                if (arr[j] > arr[j + 1]) { //前一个数大于后一个
+                    swap(arr, j, j + 1);
+                }
+            }
+        }
+        }
+        /*
+         选择排序
+        */
+        function selectionSort(arr){
+            for (var i = 0; i < arr.length - 1; i++) {
+                    min = i;
+                    for (var j = i+1; j < arr.length; j++) {
+                        if(arr[j]<arr[min]){
+                            min = j;
+                        }
+                    }
+                    if(i!=min)
+                        swap(arr, i, min);
+                }
+                console.log(arr);
+        }
+        /*
+            快速排序
+        */
+        function quickSort(arr,left,right){
+        if(left>right){
+            return arr;
+        }
+        var mid = partition(arr,left,right);
+        quickSort(arr,left,mid-1);
+        quickSort(arr,mid+1,right);
+        }
+        function partition(arr,left,right){
+            var cur = arr[left];
+            while(left<right && arr[left]<=cur)
+                left++;
+            arr[right] = arr[left];
+            while(left<right && cur<=arr[right])
+            right--;
+            arr[left] = arr[right];
+            arr[left] = cur;         
+            return left;
+        }
+
+        function quicksort1(arr){
+            if(arr.length<=1){
+                return arr;
+            }
+            var midIndex = parseInt(arr.length/2); //记录中间值下标
+            var midVal = arr[midIndex];     //记录中间值
+            //初始化两个左右数组，存放划分左右的值
+            var left =[];
+            var right = [];
+
+            for(var i = 0; i < arr.length; i++){
+                if(i==midIndex){
+                    continue;
+                }
+                if(arr[i]>midVal){
+                    right.push(arr[i]);
+                }
+                else{
+                    left.push(arr[i]);
+                }
+            }
+            var res = quicksort1(left).concat(midVal,quicksort1(right));
+            
+            return res;
+
+        }
+        /*
+            插入排序
+            外圈遍历数组，
+            内圈 从外圈当前元素的位置开始向前比较，若比前一个小则交换
+
+        */
+        function insertSort(arr){
+            for(var i =1;i<arr.length;i++){
+                for(var j = i-1;j>0 && arr[j]>arr[j+1];j--){
+                        swap(arr,j,j+1);
+                }
+            }
+        }
+        /*
+            希尔排序
+        */
+        function shellSort(arr){
+
+            var interval = parseInt(arr.length/2);
+            while(interval>0){
+            for(var i =1;i<arr.length;i++){
+                for(var j = i-interval;j>0 && arr[j]>arr[j+interval];j--){
+                        swap(arr,j,j+interval);
+                }
+            }
+        }
+        }
+
+    </script>
+</body>
+
+</html>

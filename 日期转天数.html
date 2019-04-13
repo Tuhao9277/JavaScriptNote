@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //闰年： 不是整百年但能被4整除
+        //      是整百年且能被400整除
+        function ismoonYear(year){
+            if((year % 4 ==0 && year%100!=0) || (year%100==0 && year %400 == 0)){
+                return true;
+            }
+            return false;
+        };
+    function whenDay(date){
+        var year = parseInt(date/10000);
+        var moonYear = ismoonYear(year);
+        var month = parseInt(date%10000/100);
+        var result = 0,
+        res; 
+            for(var i = 1;i<month;i++){
+                switch(i){
+                    case 1:case 3:case 5:case 7:case 8:case 10:case 12:{
+                        res=31;
+                        break;
+                    }
+                    case 4 : case 6:case 9:case 11:{
+                        res = 30;
+                        break;
+                    }
+                    case 2:{
+                        if(moonYear){
+                            res = 29;
+                            
+                        }else{
+                            res = 28;
+                        }
+                        break;   
+                    }
+                }
+                result +=res;
+            }
+            var day = parseInt(date%100);
+                result+=day;
+        return result;
+    }
+    </script>
+</body>
+</html>

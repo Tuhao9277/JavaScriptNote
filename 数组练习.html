@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        二维数组的赋值与输出
+        方法1：新建一大数组，和一个计数器
+        大数组的每一层都新建一个小数组，
+        存数，计数器++
+        */
+        var arr = [];
+        var num = 1;
+        for (var i = 0; i < 5; i++) {
+            arr[i] = [];
+            for (var j = 0; j < 5; j++) {
+                arr[i][j]= num++;
+            }
+        }
+        /*方法二
+            一重循环
+            bt每存5个数就放到b里，bt清空，继续存新的数
+        */
+        var b = [];
+        var bt = [];
+        for (var i = 1; i <= 25; i++) {
+            bt.push(i);
+            if (i % 5 == 0) {
+                b.push(bt);
+                bt = [];
+            }
+        }
+
+        for (var i = 0; i < 5; i++) {
+
+            for (var j = 0; j <= i; j++) {
+
+                document.write(arr[i][j] + " ");
+            }
+            document.write("<br />");
+        }
+    </script>
+</body>
+
+</html>
