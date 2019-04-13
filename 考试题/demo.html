@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [12, 54, 8, 32];
+
+        function map(arr, num) {
+            return arr.map(function (item) {
+                return item + num;
+            })
+        }
+
+        // console.log(map(arr,8));
+        // console.log(arr);
+        var arr = [12, 54, 8, 32, 7, 8, 8, 8, 7];
+        function findMax(arr) {
+            var count = 0,
+                max = 1,
+                curValue = arr[0];
+            for (var i = 0; i < arr.length; i++) {
+                var cur = arr[i];
+                for (var j = i; j < arr.length; j++) {
+                    if (cur == arr[j]) {
+                        count++;
+                    }
+                }
+                if (count > max) {
+                    curValue = cur;
+                    max = count;
+                }
+                count = 0;
+            }
+            console.log("最多出现的元素是:", curValue, "出现了" + max + "次");
+        }
+        //findMax(arr);
+
+       // var a = [1, 2, [3, [4, 5, [1, 2, 3]], 4, 5], 6, [7, 8], 9];
+
+       //暴击问题
+       var N=130,
+       chance = 0.0557,i=1,
+       baoji = chance,
+       count = 0,
+       rand;
+//        function play(){
+//            var count = 0;
+            
+//                 var baoji = chance; //每次攻击前初始化暴击概率
+               
+//                 while(!attack(baoji)){
+//                     //当未暴击时，输出当前攻击次数和暴击次数，以及对应概率
+//                     console.log("当前第"+i+"次攻击，暴击次数"+count+"次","实际概率："+baoji);
+//                     //暴击值增加
+//                     baoji+=chance;
+//                     //进行下一次攻击
+//                     i++;
+//                 }
+//                 //触发暴击
+//                 count++;
+//                 console.log("当前第"+i+"次攻击，暴击次数"+count+"次","实际概率："+baoji);
+//                 i++;
+//         function attack(baoji){
+          
+//           if(rand<baoji){  //如果产生的随机数落在暴击概率里，则触发暴击
+//               return true;
+//           }
+//           return false;
+//   }
+ 
+//        }
+
+function play(){
+      var date = new Date();
+       rand = date.getTime()%10000/10000;
+       console.log(rand);
+        if(rand<baoji){  
+             //触发暴击//
+            count++;
+            console.log("当前第"+i+"次攻击，暴击次数"+count+"次","实际概率："+baoji);
+            baoji = chance;
+        }
+        else{
+            console.log("当前第"+i+"次攻击，暴击次数"+count+"次","实际概率："+baoji);
+            //暴击值增加
+            baoji+=chance;
+
+            //进行下一次攻击
+        }
+        i++;
+    }
+      setInterval(function(){play()},1000);
+
+  
+
+    </script>
+</body>
+
+</html>
