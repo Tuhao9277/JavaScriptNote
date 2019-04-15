@@ -17,16 +17,18 @@ var chance = 0.0557,i=1,
        rand;
 function play(){
       var date = new Date();
-       rand = date.getTime()%10000/10000;
+       rand = date.getMilliseconds()/1000;
       
         if(rand<baoji){  
              //触发暴击//
             count++;
-            console.log("当前第"+i+"次攻击，暴击次数"+count+"次","实际概率："+baoji);
+            console.log("当前第"+i+"次攻击，暴击次数"+count+"次","当前触发概率："+baoji+
+            "实际概率"+count/i);
             baoji = chance;
         }
         else{
-            console.log("当前第"+i+"次攻击，暴击次数"+count+"次","实际概率："+baoji);
+            console.log("当前第"+i+"次攻击，暴击次数"+count+"次","当前触发概率："+baoji+
+            "实际概率"+count/i);
             //暴击值增加
             baoji+=chance;
 

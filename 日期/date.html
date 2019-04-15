@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过日期对象，获取100天之后是星期几
+        var weeks = ["7","1","2","3","4","5","6"];
+    var date = new Date(),
+        year =date.getFullYear(), //得到年份
+        month = date.getMonth(),  //得到月份
+        today = date.getDate();   //得到天
+    var temp = new Date(year,month,today+100);  //设置100天后 
+    document.write(temp.getFullYear()+"-"+
+    (temp.getMonth()+1)+"-"+temp.getDate()+
+    "-"+weeks[temp.getDay()]);  //打印100天后的日期
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function rnd(seed) {
+            seed = (seed * 9301 + 49297) % 233280;
+            return seed / (233280.0);
+        }
+        function rand(number) {
+           var today = new Date();
+           var seed = today.getTime();
+            return Math.ceil(rnd(seed) * number);
+        }
+        myNum = (rand(100000)); //每次调用都会返回一个1-10000的数字
+    </script>
+</body>
+
+</html>
