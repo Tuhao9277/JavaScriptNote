@@ -107,9 +107,10 @@
 	}
 
 	function stringFilter(content) {
+	
 		var words = ["草", "操你妈", "傻逼", "sb", "dsb", "sd"];
+		content = content.toLowerCase();
 		words.forEach(function (word) {
-			content = content.toLowerCase();
 			while (content.indexOf(word) != -1) {
 				content = content.replace(word, "**")
 			}

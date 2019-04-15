@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p>账号：<input onblur="verify()" id="usname" type="text">
+    </p>
+
+
+    <script>
+        function verify() {
+            var usname = document.getElementById("usname").value;
+            if (usname.length < 6 || usname.length > 20) {
+                alert("长度不合法！");
+            }
+            //判断首字符是否为数字
+            //数字对应的ASCII
+            if (usname.charCodeAt(0) >= 48 && usname.charCodeAt(0) <= 57) {
+                alert("不能以数字开头");
+            }
+            var flag = true;
+            //检验文本中是否包含非法字符
+            for (const key in usname) {
+                var asc = usname.charCodeAt(key);
+                //如果文本字符非法，不在区间内
+                if (!((asc >= 65 && asc <= 90) ||(asc >= 48 && asc <= 57)|| (asc >= 97 && asc <= 122) || asc == 95)) {
+                    //置为true
+                    flag = false;
+                    break;
+                }
+                
+            }
+            if (!flag) {
+                alert("用户名中存在非法字符！");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

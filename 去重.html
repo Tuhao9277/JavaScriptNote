@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组去重</title>
+</head>
+<body>
+    <script>
+        /* 思路：
+            
+                方法一：新建一个新数组，遍历字符串，查找字符串当前元素是否在新数组中存在，若不存在则push
+                方法二：使用Hash法。将字符串的字符存进一个变量里作属性，由于属性没有重复，故实现了去重操作。
+        */
+        var x = "askdkjvkxcvbhaahjckja";
+
+        /*
+            查看每个字符对应的出现次数
+        */
+        var str2 = x.toLowerCase();
+        for (const i in str2) {
+            var count =0;
+            for(const j in str2){
+                if(str2[i]==str2[j])
+                    count++;
+            }
+            console.log(str2[i],count);
+        }
+
+        /*
+            方法二
+        */
+        function removeRepeatE(str){
+            var temp = [];
+            for (const i in str) {
+                if(temp.indexOf(str[i]) == -1)
+                    temp.push(str[i]);
+            }
+            return temp;
+        }
+        /*
+            方法三
+        */
+        function removeRepeatEByHash(str){
+            var temp = {};
+            for (const i in str) {
+                temp[str[i]] = 1;
+            }
+            return temp;
+        }
+        
+
+
+    </script>
+</body>
+</html>

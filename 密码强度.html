@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>密码强度</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+    
+    input{
+        outline: 0;
+    }
+    #pwd_level{
+        list-style: none;
+        margin: 10px;
+        border-radius: 15px;
+        width: 174px;
+        border: 1px solid gainsboro;
+        height: 16px;
+        padding-left: 0;
+    }
+    #pwd_level li{
+        background: silver;
+        float: left;
+        width: 50px;
+        margin: 4px;
+        height: 8px;
+    }
+    #pwd_level_tip{
+        margin: 10px;
+        width: 174px;
+        height: 16px;
+    }
+    #pwd_level_tip div{
+        color: #999;
+        float: left;
+        width: 58px;
+        height: 16px;
+        text-align: center;
+        line-height: 16px;
+        visibility: hidden;
+    }
+    
+    </style>
+    <script>
+         function check(){
+                var psw = txt.value;
+                var pwd = pwd_level.children;
+                var msg =pwd_level_tip.children;
+                for (var i = 0; i < pwd.length; i++) {//防止输入正确密码后倒退删除时候出问题
+                pwd[i].style.backgroundColor = 'silver';
+                }
+                if(hasSpecial(psw)){
+                    //强
+                    pwd[0].style.background = "#E94546";
+                    pwd[1].style.background = "#FF0";
+                    pwd[2].style.background = "#14171F";
+                    msg[2].style.visibility = "visible";
+
+                }
+                else if(hasNumber(psw) && hasLetter(psw)){
+                    //中
+                    pwd[0].style.background = "#E94546";
+                    pwd[1].style.background = "#FF0";
+                    msg[1].style.visibility = "visible";
+                }
+                else{
+                    //弱
+                    msg[0].style.visibility = "visible";
+                    pwd[0].style.background = "#E94546";       
+                }
+            }
+            function hasSpecial(str){
+                for (const i in str) {
+                    var asc = str.charCodeAt(i);
+                    if (!((asc >= 65 && asc <= 90) ||(asc >= 48 && asc <= 57)|| (asc >= 97 && asc <= 122) || asc == 95)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            function hasNumber(str){
+                for (const i in str) {
+                    var asc = str.charCodeAt(i);
+                    if (asc >= 48 && asc <= 57) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            function hasLetter(str){
+                for (const i in str) {
+                    var asc = str.charCodeAt(i);
+                    if ((asc >= 65 && asc <= 90) || (asc >= 97 && asc <= 122)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        onload = function () {
+            var tds = document.getElementById('tb').getElementsByTagName('td');
+           
+
+            document.getElementById('txt').onkeyup = function () {
+                for (var i = 0; i < tds.length; i++) {//防止输入正确密码后倒退删除时候出问题
+                    tds[i].style.backgroundColor = 'gray';
+                }
+                if (this.value.length>0) {
+                    var result = checkPwd(this.value);
+                    if (result<=1) {//弱
+                        tds[0].style.backgroundColor='red';
+                    }else if (result==2) {//中
+                        tds[0].style.backgroundColor='green';
+                        tds[1].style.backgroundColor='green';
+    
+                    }else if (result==3) {//强
+                        tds[0].style.backgroundColor='blue';
+                        tds[1].style.backgroundColor='blue';
+                        tds[2].style.backgroundColor='blue';
+                    }
+                }
+            }
+        }
+
+
+        function checkPwd(msg){ //判断含有数字字母特殊符号
+            var lvl = 0;
+            if (msg.match(/[0-9]/)){
+                lvl++;
+            }
+            if (msg.match(/[a-zA-Z]/)) {
+                lvl++;
+            }
+            if (msg.match(/[^0-9a-zA-Z]/)) {
+                lvl++;
+            }
+            if (msg.length<6) {
+                lvl--;
+            }
+            return lvl;
+        }
+    </script>
+</head>
+<body>
+    <input type="text" name="name" id="txt" onkeyup="check()" size="30" />
+    <ul id="pwd_level">
+        <li style="border-top-left-radius :8px;border-bottom-left-radius :8px;"></li>
+        <li></li>
+        <li style="border-top-left-radius :8px;border-bottom-left-radius :8px;"></li>
+    </ul>
+    <div id="pwd_level_tip">
+        <div id="">弱</div>
+        <div id="">中</div>
+        <div id="">强</div>
+    </div>
+</body>
+</html> 
