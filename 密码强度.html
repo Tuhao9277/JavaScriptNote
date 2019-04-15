@@ -5,34 +5,37 @@
     <title>密码强度</title>
     <meta charset="utf-8" />
     <style type="text/css">
-    
+    *{
+        margin: 0;
+        padding: 0;
+    }
     input{
         outline: 0;
     }
     #pwd_level{
         list-style: none;
-        margin: 10px;
+        margin-top: 10px;
         border-radius: 15px;
-        width: 174px;
+        width: 200px;
         border: 1px solid gainsboro;
         height: 16px;
-        padding-left: 0;
+  
     }
     #pwd_level li{
         background: silver;
-        float: left;
+        display: inline-block;
         width: 50px;
         margin: 4px;
         height: 8px;
     }
     #pwd_level_tip{
-        margin: 10px;
-        width: 174px;
+      
+        width: 190px;
         height: 16px;
     }
     #pwd_level_tip div{
         color: #999;
-        float: left;
+        display: inline-block;
         width: 58px;
         height: 16px;
         text-align: center;
@@ -49,12 +52,18 @@
                 for (var i = 0; i < pwd.length; i++) {//防止输入正确密码后倒退删除时候出问题
                 pwd[i].style.backgroundColor = 'silver';
                 }
+
+                for (var i = 0; i < msg.length; i++) {//防止输入正确密码后倒退删除时候出问题
+                    msg[i].style.visibility = 'hidden';
+                }
                 if(hasSpecial(psw)){
                     //强
                     pwd[0].style.background = "#E94546";
                     pwd[1].style.background = "#FF0";
-                    pwd[2].style.background = "#14171F";
+                    pwd[2].style.background = "#1a9d1a";
                     msg[2].style.visibility = "visible";
+                    msg[1].style.visibility = "visible";
+                    msg[0].style.visibility = "visible";
 
                 }
                 else if(hasNumber(psw) && hasLetter(psw)){
@@ -62,6 +71,7 @@
                     pwd[0].style.background = "#E94546";
                     pwd[1].style.background = "#FF0";
                     msg[1].style.visibility = "visible";
+                    msg[0].style.visibility = "visible";
                 }
                 else{
                     //弱
