@@ -96,15 +96,9 @@
 </body>
 <script type="text/javascript">
 	var sendBtn = document.getElementById("sendBtn");
-
-
-
 	sendBtn.onclick = function () {
 		var content = edit.children[1].children[0].value;
-
 		content = stringFilter(content);
-
-
 		console.log(content);
 		var newComent = commentlist.children[0].cloneNode(true);
 		newComent.children[1].innerText = content;
