@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    
     <script>
-        
-        var d=  new Date('2022-08-10');
-        setInterval(function(){
-            
-            view.innerHTML = "";
-            
-        },1000)
-        
-        </script>
+         var d = new Date('2022-08-10');
+        const px_d = 1000 * 60 * 60 * 24;
+        const px_h = 1000 * 60 * 60;
+        const px_m = 1000 * 60;
+        const px_s = 1000;
+        function timer () {
+           
 
-        <div class="" id="view">
+            var date = new Date(),
+                val = d.getTime() - date.getTime(),
+                day = parseInt(val / (px_d)),
+                hour = parseInt((val - day * px_d) / px_h),
+                min = parseInt((val - day * px_d - hour * px_h ) / px_m),
+                sec = parseInt((val - day * px_d - hour * px_h - min * px_m) / px_s);
+            view.innerHTML = "距离2022东京奥运会开幕还有" + day + "天" + hour + "时" + min + "分" + sec + "秒";
+        }
+      
+        setInterval(timer, 1000);
 
-        </div>
-
+    </script>
+    <div class="" id="view">
+    </div>
 </body>
+
 </html>
