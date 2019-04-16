@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="code">
+    <button onclick="exec"></button>
+    <script type="text/javascript">
+        // eval("alert('123')");
+        function exec(){
+            window.eval(code.value);
+        }
+
+        // 反复调用
+        // window.setTimeout(function fn(){
+        //     concole.log("timeout");
+        //     setTimeout(fn,1000);
+        // },1000)
+    
+    </script>
+    
+</body>
+</html>

@@ -44,7 +44,9 @@
     }
     
     </style>
+    <script src="common.js"></script>
     <script>
+        
          function check(){
                 var psw = txt.value;
                 var pwd = pwd_level.children;
@@ -79,33 +81,7 @@
                     pwd[0].style.background = "#E94546";       
                 }
             }
-            function hasSpecial(str){
-                for (const i in str) {
-                    var asc = str.charCodeAt(i);
-                    if (!((asc >= 65 && asc <= 90) ||(asc >= 48 && asc <= 57)|| (asc >= 97 && asc <= 122) || asc == 95)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            function hasNumber(str){
-                for (const i in str) {
-                    var asc = str.charCodeAt(i);
-                    if (asc >= 48 && asc <= 57) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            function hasLetter(str){
-                for (const i in str) {
-                    var asc = str.charCodeAt(i);
-                    if ((asc >= 65 && asc <= 90) || (asc >= 97 && asc <= 122)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
+           
         onload = function () {
             var tds = document.getElementById('tb').getElementsByTagName('td');
            
