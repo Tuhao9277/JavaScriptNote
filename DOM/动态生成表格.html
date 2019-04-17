@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>面试题-动态生成表格</title>
+    <style>
+        body {
+            font: 700 14px/1.5 Arial;
+            margin: 0;
+            padding: 0 10px;
+        }
+
+        table {
+            clear: both;
+            border: 1px solid #000;
+        }
+
+        td {
+            color: #FFF;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #000;
+            padding: 5px;
+        }
+
+        #setting {
+            float: left;
+            clear: left;
+            line-height: 28px;
+            margin: 10px 0;
+        }
+
+        #setting input {
+            width: 50px;
+            font-family: inherit;
+            border: 2px solid #CCC;
+            margin: 0 5px;
+            padding: 4px;
+        }
+
+        #btn {
+            font-size: 14px;
+            line-height: 18px;
+            color: #fff;
+            text-decoration: none;
+            background: #353535;
+            border-top: 1px #999 solid;
+            border-radius: 5px;
+            padding: 4px 6px;
+        }
+
+        #msg {
+            float: left;
+            clear: both;
+            height: 25px;
+            display: none;
+            line-height: 25px;
+            margin-bottom: 10px;
+        }
+
+        #msg em {
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        #setting label,
+        #setting input,
+        #setting a,
+        #msg span,
+        #msg em {
+            float: left;
+        }
+    </style>
+    <script src="../common.js"></script>
+    <script>
+        /*
+         要求：
+         1) 任意输入行数或列数, 生成对应表格;
+         2) 行数, 列数必须为正整数类型, 否则提示非法;(这里我用正则限制1-100, 避免网友测试输入过大值造成浏览器假死)
+         3) 在生成表格的单元格中随机填入1到15之间的随机数, 并给每个单元格设置随机背景颜色;
+         4) 点击任意单元格, 将其数和背景颜色输出显示;
+         5) 效率要求：100*100生成表格时间小于3秒;
+         6) 代码中要用到事件代理机制;
+         7) 设计一种简单机制, 使单元格数小于255*255*255时, 颜色不重复
+         8) 要求符合w3c验证, 兼容IE, Firefox, chrome等浏览器
+        */
+        window.onload = function(){
+            var createBtn = document.getElementById("btn");
+           
+            createBtn.onclick = function(){
+            
+                var rows = document.getElementById("row").value;
+                var cols = document.getElementById("col").value;
+                console.log(rows,cols);
+                var tab =  document.createElement("table"); //生成元素--表格
+                
+                document.body.appendChild(tab);
+
+                for (let i = 0; i < rows; i++) {
+                   var tr = document.createElement("tr");
+                    tab.appendChild(tr);
+                    tr.onclick = function(){
+                        this.remove(); //删
+                    }
+                    for (let j = 0; j < cols; j++) {
+                        var td = document.createElement("td");
+                        tr.appendChild(td);
+                        td.innerHTML = Math.floor(Math.random()*14)+1;
+                        td.style.background = randomColor();
+                        
+                        td.onclick = function(){
+                            //改
+                            this.style.color = "black"; //this指向当前函数的name值
+                        
+                        }
+
+                    }
+
+                }
+       
+              
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="setting">
+        <label>行数</label><input type="text" id="row">
+        <label>列数</label><input type="text" id="col">
+        <a href="javascript:;" id="btn">生成表格</a>
+    </div>
+    <div id="msg" style="display: none;"></div>
+
+
+    <table>
+        <tbody>
+            <tr>
+                <td style="background:#8d3587;">8</td>
+                <td style="background:#1c9cd5;">12</td>
+                <td style="background:#693c5e;">10</td>
+                <td style="background:#746a9c;">8</td>
+                <td style="background:#ea0424;">5</td>
+            </tr>
+            <tr>
+                <td style="background:#e193bd;">10</td>
+                <td style="background:#4058eb;">3</td>
+                <td style="background:#d8b8e7;">9</td>
+                <td style="background:#1b91cb;">11</td>
+                <td style="background:#1e141d;">1</td>
+            </tr>
+            <tr>
+                <td style="background:#a55160;">4</td>
+                <td style="background:#790711;">15</td>
+                <td style="background:#708140;">11</td>
+                <td style="background:#a08a60;">3</td>
+                <td style="background:#85a478;">11</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

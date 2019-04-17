@@ -1,13 +1,13 @@
-function hasSpecial(str){
+function hasSpecial(str) {
     for (const i in str) {
         var asc = str.charCodeAt(i);
-        if (!((asc >= 65 && asc <= 90) ||(asc >= 48 && asc <= 57)|| (asc >= 97 && asc <= 122) || asc == 95)) {
+        if (!((asc >= 65 && asc <= 90) || (asc >= 48 && asc <= 57) || (asc >= 97 && asc <= 122) || asc == 95)) {
             return true;
         }
     }
     return false;
 }
-function hasNumber(str){
+function hasNumber(str) {
     for (const i in str) {
         var asc = str.charCodeAt(i);
         if (asc >= 48 && asc <= 57) {
@@ -16,7 +16,7 @@ function hasNumber(str){
     }
     return false;
 }
-function hasLetter(str){
+function hasLetter(str) {
     for (const i in str) {
         var asc = str.charCodeAt(i);
         if ((asc >= 65 && asc <= 90) || (asc >= 97 && asc <= 122)) {
@@ -26,7 +26,8 @@ function hasLetter(str){
     return false;
 }
 function addZero(num) {
-    return num < 10 ? "0" + num : num + "";
+    num = num + "";
+    return num.length == 1 ? "0" + num : num;
 }
 function date2string(date, sp) {
     sp = sp || "-"; // 或操作符的运用 
@@ -43,17 +44,33 @@ function isLeapYear(year) {
     return year % 400 == 0 || (year % 4 == 0 && year % 100 == 0);
 }
 
-function getDaysOfMonth(month){
+function getDaysOfMonth(month) {
 
 }
 
-function string2date(str){
-    if( hasLetter(str)){
+function string2date(str) {
+    if (hasLetter(str)) {
         throw new Error("Invalid Date!");
     }
     return new Date(str);
 }
 
-function betweenDate(d1,d2){
+function betweenDate(d1, d2) {
 
+}
+function randomColor() {
+
+    var r = Math.floor(Math.random() * 255 + 1).toString(16),
+        g = Math.floor(Math.random() * 255 + 1).toString(16),
+        b = Math.floor(Math.random() * 255 + 1).toString(16);
+    return "#" + addZero(r) + addZero(g) + addZero(b);
+
+}
+/**
+ * 
+ * @param {Dom} ele dom元素
+ * @param {property} props Dom属性
+ */
+function getStyle(ele, props) {
+    return ele.currentStyle ? ele.currentStyle[props] : getComputedStyle(ele)[props];
 }

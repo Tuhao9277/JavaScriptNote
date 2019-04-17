@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="put1" class="button">
+    <input type="radio" name="sex" id="radioSelect1" value="Male" />
+    <input type="radio" name="sex" id="radioSelect2" value="Fale" />
+    <input type="radio" name="sex" id="radioSelect3" value="Other" />
+    <div class="main">abc</div>
+    <div class="main">abc</div>
+    <div class="main">abc</div>
+    <p>253</p><p>253</p><p>253</p>
+</body>
+<script type="text/javascript">
+    //页面加载顺序
+    console.log(document.body);
+
+    /* document 对页面上的内容、标签（通过getElement）进行操作 */
+
+    // ByName 通过Name属性
+    array = document.getElementsByName("sex")
+    for (var i = 0; i < array.length; i++) {
+        array[i].value = i;
+    }
+    // ByClassName 通过类名 IE<8 不兼容
+    arr2 = document.getElementsByClassName("main");
+    for (var index = 0; index < arr2.length; index++) {
+        arr2[index].innerHTML +=arr2[index].innerHTML; //字符串相加
+      
+        
+    }
+    // ByTagName 通过标签名
+    arr3 = document.getElementsByTagName("p");
+    for (var index = 0; index < arr3.length; index++) {
+       
+        arr3[index].innerHTML *=arr3[index].innerHTML; //字符串转为数字运算
+        
+    }
+
+
+    </script>
+</html>

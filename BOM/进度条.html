@@ -39,17 +39,22 @@
     function jindutiao(){
     var num = 0;
     var timer = setInterval(function () {
-
+        //Js不能直接获取非行内样式,需使用如下方式得到，但 IE<9不兼容
+       // window.getComputedStyle(filldiv).width;
+        // IE8及以下兼容 filldiv.currentStyle.width
+        // 解决浏览器兼容问题 
+       
         if (num == 200)
             clearInterval(timer);
         filldiv.style.width = num + "px";
         percent.innerHTML = parseInt(num / 200 * 100) + "%";
-
+        var _width = getStyle(filldiv,"width");
+        console.log(_width);
         num++;
     }, 30);
 }
 </script>
-
+<script src="../common.js"></script>
 <body onload="jindutiao()">
     <div id="progress">
         <div id="filldiv"></div>
