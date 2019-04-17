@@ -74,3 +74,24 @@ function randomColor() {
 function getStyle(ele, props) {
     return ele.currentStyle ? ele.currentStyle[props] : getComputedStyle(ele)[props];
 }
+// 解决IE6以下不兼容document.getElementsByClassName()的问题
+function getClassName(className, element) {
+    if (!document.getElementsByClassName) {
+        document.getElementsByClassName = function (className, element) {
+            var children = (element || document).getElementsByTagName('*');
+            var elements = [];
+            for (let i = 0; i < children.length; i++) {
+                var child = children[i];
+                var classNames = child.className.split(' ');
+
+                for (let j = 0; j < classNames.length; j++) {
+                    if (classNames[j] == className) {
+                        elements.push(classNames[j]);
+                        break;
+                    }
+                }
+            }
+            return elements;
+        }
+    }
+}
