@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+   .container{
+       width: 1200px;;
+       height: 600px;
+       margin: 0 auto;
+   }
+    #top{
+        position: relative;
+        height: 300px;
+    }
+    #pos{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+    ul li{
+        margin-right: 5px;
+        width: 5px;
+        height: 100px;
+        display: inline-block;
+    }
+    #top>#pos> li{
+        background: #2196F3;
+    }
+    #neg{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+   #neg li{
+       
+        background: #F44336;
+        
+    }
+</style>
+<script>
+   onload = function(){
+   var arr = new Array(100);
+    var pos = document.getElementById("pos");
+    var neg = document.getElementById("neg");
+    
+    // 分钱
+    for(var i = 0 ; i< arr.length;i++)
+        arr[i] = 100;
+    // 随机分配
+    for (let k = 0; k < 5000; k++) {
+        for(var i = 0 ;i<arr.length ; i++){
+        arr[i]  -=1;
+        var j = parseInt(Math.random()*arr.length);
+        arr[j] +=1;
+    } 
+    }
+    
+    var i = 0;
+    // var t = setInterval(function(){
+       
+    //     var i = parseInt(Math.random()*arr.length);
+    //     arr[i]  -=1;
+    //     var j = parseInt(Math.random()*arr.length);
+    //     arr[j] +=1;
+        
+    //     render(arr);
+    //  console.log(123);
+    // } ,10000)   
+        
+   render(arr);
+    function render(arr){
+       
+        //排序
+     
+        arr.sort(function (x,y) { return x-y });
+       
+
+        for (let i = 0; i < arr.length; i++) {
+            if(arr[i]>0){
+                //放到上面，
+                var li = document.createElement("li");
+               
+                li.style.height = getComputedStyle(li).height+ arr[i]+"px";
+              
+                pos.appendChild(li);
+
+            }else{
+                //放到下面
+                var li = document.createElement("li");
+                li.style.height =  getComputedStyle(li).height - arr[i]+"px";
+              //  li.style.top =  300 - getComputedStyle(li).height +"px";
+                neg.appendChild(li);
+            }
+            
+        }
+    }
+}
+</script>
+<body>
+    <div class="container">
+    <div id="top">
+            <ul id="neg">
+                    
+                </ul>
+        <ul id="pos">
+           
+        </ul>
+    </div>
+    </div>
+</body>
+</html>

@@ -95,3 +95,35 @@ function getClassName(className, element) {
         }
     }
 }
+function $(id) {
+    return document.getElementById(id);
+}
+
+function getPosX(ele) {
+    var sum = left = ele.offsetLeft;
+    while (ele.offsetParent) {
+        sum +=  ele.offsetParent.offsetLeft;
+        ele = ele.parentNode;
+    }
+    return sum;
+} 
+
+//获取元素在页面上的位置（x,y)
+function getPagePos(ele) { 
+    if(!ele){
+        throw new Error("ele参数有问题，无法获取位置！");
+    }
+    var left = ele.offsetLeft;
+    var top = ele.offsetTop;
+    while(ele.offsetParent){
+        left +=ele.offsetParent.offsetLeft;
+        top +=ele.offsetParent.offsetTop;
+        ele = ele.offsetParent;
+    }
+
+    return {
+        x: left,
+        y: top
+    }
+
+}

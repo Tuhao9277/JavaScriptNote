@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0 ;
+            padding: 0;
+        }
+     #box{
+         margin: 100px 100px;
+        width: 100px;
+        height: 100px;
+        background: rgb(87, 6, 83);
+     }
+    </style>
+</head>
+<script>
+    window.onload = function(){
+        //鼠标点击事件
+        /*
+        鼠标相对于可视区页面的坐标
+            clientX 
+            clientY
+
+            可以计算带滚动条的页面距离
+            PageX，PageY 
+        相对于按钮的
+        offsetX,offsetY
+
+
+        IE8及以下不兼容,需要使用window.event
+
+
+        */
+    var btn = document.getElementById("box");
+    btn.onclick = function (event) { 
+        var evt = event || window.event; 
+        console.log(evt.offsetX,evt.offsetY);
+    }
+//    document.body.onclick = function (event){
+//     var evt = event || window.event;
+//     console.log(evt.pageX,evt.pageY);
+//     console.log(evt.clientX,evt.clientY);
+// }
+
+    /*对老版本FF浏览器的PageX支持，IE8及以下仍不兼容*/
+    // function exec(evt) {
+    //     console.log(evt.pageX,evt.pageY)  }
+   
+    /*
+    PageX对IE老版本的支持
+    */
+    document.body.onclick = function (event){
+    var evt = event || window.event;
+        var _scrollLeft = evt.pageX || (evt.clientX+(document.body.scrollLeft|| document.documentElement.scrollLeft));
+        var _scrollLeft = evt.pageY || (evt.clientY+(document.body.scrollTop|| document.documentElement.scrollTop));
+    console.log(evt.clientX+document.documentElement.scrollLeft,evt.clientY+evt);
+}
+}
+
+</script>
+<body onclick="exec(event)">
+        <div id="box">
+
+            </div> <div id="box">
+
+                </div>
+    <div id="box">
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    //使用文本节点将不要解析的标签、代码创建到页面上
+    var txt = document.createTextNode(" <b>aaa</b> ");
+    document.body.appendChild(txt);
+
+    var ele = $("box");
+    //改
+    ele.id = "aa";
+    ele.getAttribute("index");
+    ele.setAttribute("index",8);
+
+    parent.removeChild(ele);
+
+    ele.currentStyle.width;
+    getComputedStyle(ele).width;
+</script>
+
+<body>
+    <!-- 动态获取，修改属性，用中括号 -->
+    <p> <label for="">属性名</label> <input type="text" id="property">  </p>
+    <p>  </p>
+    <div id="box">
+
+    </div>
+</body>
+<script>
+     box.innerHTML = "<p>测试</p>";
+        box.innerText = "<p>测试</p>";
+    </script>
+</html>

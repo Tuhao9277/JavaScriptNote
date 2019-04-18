@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+</head>
+<style type="text/css">
+    body {
+        font: 12px;
+        padding: 0;
+        margin: 0;
+    }
+
+    #bigdiv {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .smalldiv {
+        width: auto;
+        height: 100px;
+        background: #066;
+    }
+
+    .infoa {
+        color: #fff;
+    }
+
+    #infodiv {
+        color: #fff;
+        width: 200px;
+        position: absolute;
+        height: 150px;
+        background: gray;
+        display: none;
+    }
+</style>
+</style>
+<script type="text/javascript">
+window.onload = function(){
+    var info = document.getElementsByTagName("p"); //获取列表
+    var infoArr = [];
+    for (let index = 0; index < info.length; index++) {
+        infoArr.push(info[index]);
+        
+    }
+    var win = document.getElementById("infodiv");   //获取弹出框
+    
+    for (var index in infoArr) {
+
+        // 鼠标移出，弹出框消失
+        infoArr[index].onmouseout = function(){    
+            win.style.display = 'none';
+        }
+
+        //循环添加鼠标事件
+        infoArr[index].onmouseover = function(evt){ 
+        var evt = evt||event;
+        // 设置弹出层显示与位置信息
+           win.style.display = 'block';
+           win.style.top = evt.clientY+document.documentElement.scrollTop+"px";
+           win.style.left = evt.clientX+document.documentElement.scrollLeft+"px";
+        }
+    }
+}
+</script>
+
+<body>
+    <div id="bigdiv">
+        
+<p class="bg-primary">🐸你太美</p>
+<p class="bg-success">🐵你太美</p>
+<p class="bg-info">🐑你太美</p>
+<p class="bg-warning">🐷你太美</p>
+<p class="bg-danger">🐔你太美</p>
+        
+    </div>
+    <div id="infodiv">弹出框</div>
+</body>
+
+</html>

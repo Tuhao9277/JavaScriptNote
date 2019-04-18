@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    #ul1 {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        width: 300px;
+        height: 28px;
+    }
+
+    #ul1 li {
+        float: left;
+        width: 27px;
+        height: 28px;
+    }
+
+    .active {
+        background: url("images/star.gif") no-repeat 0 -28px;
+    }
+
+    .default {
+        background: url("images/star.gif") no-repeat 0 0;
+    }
+</style>
+<script>
+    var arr = ['差评', '不推荐', '一般', '推荐', '强力推荐'];
+    window.onload = function () {
+
+        var star = document.getElementById("ul1").children;
+        var score = 0;
+        for (var item = 0; item < star.length; item++) {
+            star[item].index = item;
+            //滑向哪个，哪个变色
+            star[item].onmouseover = function (event) {
+                
+                for (var j = 0; j <= this.index; j++) {
+                    star[j].className = "active";
+            }
+            }
+            star[item].onmouseout = function (event) {
+                for (var k = score; k < star.length; k++) {
+                    star[k].className = "default";
+                }
+            }
+            star[item].onclick = function () {
+                
+                tip.innerText = arr[this.index];
+                score=this.index+1;
+            }
+        }
+
+
+    }
+</script>
+
+<body>
+    <ul id="ul1">
+        <li class="default"> </li>
+        <li class="default"> </li>
+        <li class="default"> </li>
+        <li class="default"> </li>
+        <li class="default"> </li>
+    </ul>
+    <div id="tip"></div>
+</body>
+
+</html>

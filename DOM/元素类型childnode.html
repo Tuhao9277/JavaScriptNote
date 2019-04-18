@@ -6,8 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-    <ul><li>6</li><li>6</li><li>6</li><li>6</li><li>6</li><li>6</li>
+    <ul id="box"><li>6</li><li>6</li><li>6</li><li>6</li><li>6</li><li>6</li>
     </ul>
 </body>
+<script>
+        var list = document.getElementsByTagName("li");
+        var parents = document.getElementById("box");
+        var res = parents.children;
+        
+        console.log(res);
+        for (let i = 0; i < list.length; i++) {
+            list[i].innerHTML=parseInt(list[i].innerHTML)*2;
+            
+        }
+    </script>
 </html>

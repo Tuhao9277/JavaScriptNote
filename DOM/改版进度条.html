@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>改版进度条</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+</head>
+<script>
+        var list = document.getElementsByClassName("progress-bar");
+
+        (function(){
+            var speed =30;
+            var increment = 10;
+            var t = setInterval(function(){
+                  //停止
+              
+                list[0].style.width = list[0].offsetWidth+increment+"px";
+                list[0].children[0].innerText = parseInt(list[0].offsetWidth / 940 *100)+ "%";
+                if(list[0].offsetWidth >= 940 ){
+                    clearInterval(t);
+                    list[0].style.width = 940+"px";
+                }
+              
+            },speed);
+        })();
+
+        (function(){
+            var speed =30;
+            var increment = 5;
+            var t = setInterval(function(){
+                list[1].style.width = list[1].offsetWidth+increment+"px";
+                list[1].children[0].innerText = parseInt(list[1].offsetWidth / 940 *100)+ "%";
+                //停止
+                if(list[1].offsetWidth >= 940 ){
+                    clearInterval(t);
+                    list[1].style.width = 940+"px";
+                }
+            },speed);
+        })();
+        (function(){
+            var speed =30;
+            var increment = 20;
+            var t = setInterval(function(){
+                
+                list[2].style.width = list[2].offsetWidth+increment+"px";
+                list[2].children[0].innerText = parseInt(list[2].offsetWidth / 940 *100)+ "%";
+                //停止
+                if(list[2].offsetWidth >= 940 ){
+                    clearInterval(t);
+                    list[2].style.width = 940+"px";
+                }
+            },speed);
+        })();
+        </script>
+<body>
+    <ul class="list">
+        
+    </ul>
+  
+<div class="container">
+        <div class="progress">
+            <div class="progress-bar" style="width: 0px; background:#005394;">
+                <span>55%</span>
+            </div>
+        </div>
+    
+        <div class="progress">
+            <div class="progress-bar" style="width: 0px; background:#d9534f;">
+                <span>100%</span>
+            </div>
+        </div>
+    
+        <div class="progress">
+            <div class="progress-bar" style="width: 0px; background:#f0ad4e;">
+                <span>40%</span>
+            </div>
+        </div>
+    </div>
+    
+    </body>
+    </html>
