@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.verify {
+				position: fixed;
+				top: 400px;
+				left: 50%;
+				width: 300px;
+				margin-left: -150px;
+			}
+			.verify .verify-img {
+				display: none;
+				position: absolute;
+				top: -160px;
+				left: -15px;
+				width: 100%;
+				height: 160px;
+				background: url(img/verify-bg.png) no-repeat;
+			}
+			.verify .verify-img .verify-slice {
+				position: absolute;
+				top: 38px;
+				left: 20px;
+				width: 52px;
+				height: 50px;
+				background: url(img/verify-slice.png) no-repeat;
+			}
+			.verify .verify-main {
+				position: relative;
+				width: 260px;
+				height: 25px;
+				border: 1px solid #333;
+				border-radius: 13px;
+				text-indent: 60px;
+				font-size: 12px;
+				line-height: 25px;
+				font-family: "微软雅黑";
+				background-color: #ccc;
+			}
+			.verify .verify-main .verify-move {
+				position: absolute;
+				top: -9px;
+				left: 0px;
+				width: 44px;
+				height: 42px;
+				background: url(img/icon.png) no-repeat;
+				background-position: 0 -85px;
+				cursor: pointer;
+			}
+			.verify .verify-main .verify-move.move {
+				background-position: 0 -217px;
+			}
+			.verify .verify-main .verify-status {
+				position: absolute;
+				right: 0;
+				width: 45px;
+				height: 45px;
+				background: url(img/icon.png) no-repeat;
+				background-position: 0 -85px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="verify">
+			<div class="verify-img">
+				<div class="verify-slice"></div>
+			</div>
+			<div class="verify-main">
+				<div class="verify-move"></div>
+				<div class="verify-tip">按住左边滑块，拖动完成上方拼图</div>
+			</div>
+			<div class="verify-status"></div>
+		</div>
+		
+	
+    </body>
+    
+    <script>
+        //计算属性只针对可见元素
+        //获取元素在页面上的位置（x,y)
+function getPagePos(ele) { 
+    if(!ele){
+        throw new Error("ele参数有问题，无法获取位置！");
+    }
+    var left = ele.offsetLeft;
+    var top = ele.offsetTop;
+    while(ele.offsetParent){
+        left +=ele.offsetParent.offsetLeft;
+        top +=ele.offsetParent.offsetTop;
+        ele = ele.offsetParent;
+    }
+
+    return {
+        x: left,
+        y: top
+    }
+
+}
+
+function getStyle(ele, props) {
+    return ele.currentStyle ? ele.currentStyle[props] : getComputedStyle(ele)[props];
+}
+		
+		var moveBtn = document.getElementsByClassName("verify-move")[0]; // 获取滑块
+        var slic = document.getElementsByClassName("verify-img")[0]; //获取图片
+        var smallSlic = slic.children[0];// 获取拼图块
+        
+       	// 记录
+	   	var start = getStyle(smallSlic,"left");
+			console.log(start)
+        moveBtn.onmousedown = function(e){
+			var e = e||event;
+			
+			// 获取鼠标相对于按钮的位置
+            var offX = e.offsetX;
+			var offY = e.offsetY;
+
+			// 当按下滑块的时候，显示图片
+			slic.style.display = "block";
+			
+			
+            moveBtn.onmousemove = function(e){
+				var e = e||event;
+				/*
+				计算 滑块在进度条上偏移量，
+				为鼠标在浏览器中的位置，
+				减去滑块父节点相对于最外层节点的距离，
+				再减去鼠标偏移滑块的大小，*/ 
+				var x1= e.pageX - getPagePos(moveBtn.parentNode).x-offX;
+				//最大偏移量，为滑块父级的相对宽度减去滑块的宽度
+				var x2= moveBtn.parentNode.offsetWidth - moveBtn.offsetWidth;
+				
+				//固定滑块只能在进度条上移动，最小为0，最大为x2
+                 var _left = Math.min( Math.max(x1,0),x2);
+				
+				 // 拼图位置 为初始值加上偏移量
+                 smallSlic.style.left =  parseInt(start) +_left +"px";
+				 // 滑块位置 为计算得到的_left
+				 moveBtn.style.left =  _left +"px"
+            }
+            moveBtn.onmouseup = function(e){
+                moveBtn.onmousemove =null;
+                // 用offsetLeft 获取当前偏移量
+                if(Math.abs(smallSlic.offsetLeft - 157 )<5){
+					alert("验证成功");
+					
+                }else{
+					//归0
+                    moveBtn.style.left = 0;
+					smallSlic.style.left = start ;
+                }
+            }
+            moveBtn.onmouseout = function(e){
+                moveBtn.onmousemove =null;
+            }
+        }
+
+    </script>
+</html>

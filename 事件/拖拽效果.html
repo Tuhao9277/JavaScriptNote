@@ -34,7 +34,7 @@
         //在整个浏览器上移动，故给document添加移动事件
         document.onmousemove = function(event){
             // 位置等于 鼠标浏览器的位置减去相对于图片的位置
-            box.style.left  = Math.min(Math.max(event.clientX-offsetX,0),window.innerWidth-parseInt(getComputedStyle(box).width))+"px";
+            box.style.left  = Math.min(Math.max(event.clientX-offsetX,0),window.innerWidth-box.offsetWidth)+"px";
             box.style.top  = Math.min(Math.max(event.clientY-offsetY,0),window.innerHeight)+"px";
             console.log(box.style.left);
             // box.style.left = event.clientX - offsetX + "px";

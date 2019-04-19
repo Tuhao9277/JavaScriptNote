@@ -24,7 +24,8 @@
 			list-style-type: none;
 			border: 1px solid #8f8f8f;
 			padding: 2px;
-			background: #fff;
+			background: #fff;	
+			
 		}
 
 		#menu li {
@@ -72,30 +73,41 @@
 		#menu li em.paste {
 			background-position: 0 -48px;
 		}
-        #menu .show{
+        .show{
             display: block;
         }
+		.hide{
+			display: none;
+		}
 	</style>
 	<script type="text/javascript">
 		window.onload = function () {
+
+			var menu = document.getElementById("menu");
             document.oncontextmenu = function (evt) {
-            var e = evt || event;
+			var e = evt || event;
+			var offX = e.offsetX,
+				offY = e.offsetY;
+				console.log(offX,offY);
             e.preventDefault ? e.preventDefault() : e.returnValue = false; // 阻止默认事件 ,IE不支持，使用returnValue = false
-           menu.className = "show";
+			menu.className = "show";
+			// menu.style.display = "block";
+			menu.style.left = offX +"px";
+			menu.style.top = offY+"px";
+			
 
            document.onclick =  function () {
-
-            "hide";
-        }
+			menu.className = "hide";
     }
 
 		}
+	}
 	</script>
 </head>
 
 <body>
 	<center>自定义右键菜单，请在页面点击右键查看效果。</center>
-	<ul id="menu" style="display: none; top: 54px; left: 645px;">
+	<ul id="menu" class="hide" >
 		<li class="">
 			<em class="cut"></em>
 			<a href="javascript:;">剪切</a>
