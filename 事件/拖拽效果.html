@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #box{
+        position: relative;
+        top:0;
+        left:0;
+        width: 100px;
+        height: 100px;
+        background: #F44336;
+    }
+</style>
+<body>
+    <div id="box">
+
+    </div>
+</body>
+<script>
+    var box =document.getElementById("box");
+    box.onmousedown = function(event){
+        //记下鼠标相对box的位置
+        var offsetX = event.offsetX;
+        var offsetY =event.offsetY;
+        //在整个浏览器上移动，故给document添加移动事件
+        document.onmousemove = function(event){
+            // 位置等于 鼠标浏览器的位置减去相对于图片的位置
+            box.style.left  = Math.min(Math.max(event.clientX-offsetX,0),window.innerWidth-parseInt(getComputedStyle(box).width))+"px";
+            box.style.top  = Math.min(Math.max(event.clientY-offsetY,0),window.innerHeight)+"px";
+            console.log(box.style.left);
+            // box.style.left = event.clientX - offsetX + "px";
+            // box.style.top =event.clientY - offsetY +"px"
+            
+        }
+        // 鼠标弹起时，清除移动功能
+        box.onmouseup = function(){
+            document.onmousemove =null;
+        }
+        document.onmouseout = function(){
+            document.onmousemove =null;
+        }
+    }
+</script>
+</html>
