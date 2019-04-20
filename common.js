@@ -102,22 +102,22 @@ function $(id) {
 function getPosX(ele) {
     var sum = left = ele.offsetLeft;
     while (ele.offsetParent) {
-        sum +=  ele.offsetParent.offsetLeft;
+        sum += ele.offsetParent.offsetLeft;
         ele = ele.parentNode;
     }
     return sum;
-} 
+}
 
 //获取元素在页面上的位置（x,y)
-function getPagePos(ele) { 
-    if(!ele){
+function getPagePos(ele) {
+    if (!ele) {
         throw new Error("ele参数有问题，无法获取位置！");
     }
     var left = ele.offsetLeft;
     var top = ele.offsetTop;
-    while(ele.offsetParent){
-        left +=ele.offsetParent.offsetLeft;
-        top +=ele.offsetParent.offsetTop;
+    while (ele.offsetParent) {
+        left += ele.offsetParent.offsetLeft;
+        top += ele.offsetParent.offsetTop;
         ele = ele.offsetParent;
     }
 
@@ -127,4 +127,29 @@ function getPagePos(ele) {
     }
 
 }
+function hide(ele) {
+    ele.style.display = "none";
+}
+function show(ele) {
+    ele.style.display = "block";
+}
+//封装scrollTop 解决兼容性
+function scroll() {
+    if (window.pageYOffset != null) { // ie9+ 高版本浏览器
+        // 因为 window.pageYOffset 默认的是  0  所以这里需要判断
+        return {
+            left: window.pageXOffset,
+            top: window.pageYOffset
+        }
+    } else if (document.compatMode === "CSS1Compat") {
+        return {
+            left: document.documentElement.scrollLeft,
+            top: document.documentElement.scrollTop
+        }
 
+    }
+    return {
+        left: document.body.scrollLeft,
+        top: document.body.scrollTop
+    }
+}

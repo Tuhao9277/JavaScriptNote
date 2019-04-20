@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 170px;
+            height: 170px;
+            margin: 100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .big {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 0;
+            left: 260px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+
+        /*mask的中文是：遮罩*/
+        .mask {
+            width: 85px;
+            height: 85px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            display: none;
+        }
+
+        .small {
+            position: relative;
+        }
+
+        img {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<script src="../common.js"></script>
+<script>
+    window.onload = function () {
+        /* 鼠标移到小盒子上，让大盒子里边的图片跟随小盒子一起等比例移动
+        步骤：
+        1.鼠标放上去显示盒子，移出盒子消失
+        2.老三步，新五步
+        3.右侧的大图片，等比例移动
+
+        */
+        //获取元素
+        var box = document.getElementsByClassName("box")[0];
+        var small = document.getElementsByClassName("small")[0];
+    
+        var big = box.children[1];
+        var mask = small.children[1];
+        var bigImg = big.children[0];
+
+        //1.鼠标放上去显示盒子，移出盒子消失
+        small.addEventListener("mouseenter", function (e) {
+            show(big);
+            show(mask);
+        })
+        small.addEventListener("mouseleave", function () {
+            hide(big);
+            hide(mask);
+        })
+        //2. 老三步，新五步
+        small.addEventListener("mousemove", function (e) {
+            e = e || event;
+            // 想要移动盒子，必须知道鼠标在small小图中的位置
+            var pagex = e.pageX || scroll().left + e.clientX;
+            var pagey = e.pageY || scroll().top + e.clientY;
+            var x = pagex - box.offsetLeft - mask.offsetWidth / 2;
+            var y = pagey - box.offsetTop - mask.offsetTop / 2;
+
+            // 限制盒子的范围   
+            x = Math.min(Math.max(x,0),small.offsetWidth - mask.offsetWidth);
+            y = Math.min(Math.max(y,0),small.offsetHeight - mask.offsetHeight);
+            // 移动黄盒子
+         
+            mask.style.left = x +"px";
+            mask.style.top = y+"px";
+            // 3.右侧的大图片，等比例移动
+            // 如何等比例移动，又涉及等比例移动问题
+            // 大图片/大盒子 = 小图片/mask盒子
+            // 大图片走的距离 / mask走的距离 = （大图片-大盒子）/(小图片-小盒子)
+            //小图右走，大图左走，大图片走的距离/ mask走的距离 = 大图片/小图片
+            var ratio = bigImg.offsetWidth /small.offsetWidth;
+            var xx = ratio * x;
+            var yy = ratio * y;
+
+            bigImg.style.marginTop = -yy +"px";
+            bigImg.style.marginLeft = -xx +"px";
+        })
+
+    }
+</script>
+
+<body>
+    <div class="box">
+        <div class="small">
+            <img src="img/shirt_1.jpg" alt="" />
+            <div class="mask"></div>
+        </div>
+        <div class="big">
+            <img src="img/shirt_1_big.jpg" alt="" />
+        </div>
+    </div>
+</body>
+
+</html>
