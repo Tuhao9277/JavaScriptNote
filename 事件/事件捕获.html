@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件流，冒泡事件</title>
+</head>
+<style>
+    #outer {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        left: 50px;
+        top: 30px;
+        background: #903ff9;
+    }
+
+    #inner {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        left: 500px;
+        background: #ee97ad;
+    }
+
+    #btn {
+        position: absolute;
+    }
+</style>
+
+<body>
+    老版本IE不支持捕获,事件源头，冒泡与捕获同时存在，先捕获，再冒泡
+    同样地，  e.stopPropagation(); 也可以阻止事件的传播
+    <div id="outer">
+        <div id="inner">
+
+            <button id="btn">按钮</button>
+        </div>
+    </div>
+
+</body>
+
+<script>
+        var btn = document.getElementById("btn");
+        var inner = document.getElementById("inner");
+        var outer = document.getElementById("outer");
+        btn.onclick =function (event) {
+            console.log("btn~~~~~bubble")
+        }
+        inner.onclick =function (event) {
+            console.log("inner~~~~~bubble")
+        }
+        outer.onclick =function (event) {
+            console.log("outer~~~~~bubble")
+        }
+        btn.addEventListener("click", function (event) {
+            console.log("btn~~~~~catch")
+        },true);
+    
+        inner.addEventListener("click", function (event) {
+            console.log("inner~~~~~catch")
+        },true);
+    
+        outer.addEventListener("click", function (event) {
+            console.log("outer~~~~~catch")
+        },true);
+    
+    </script>
+</html>

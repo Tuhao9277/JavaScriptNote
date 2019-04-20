@@ -115,26 +115,25 @@
     </style>
     <script type="text/javascript">
         window.onload = function () {
-          var menu   = document.getElementById("sub");
-          var select = document.getElementById("select");
-          var games  = menu.children;
-         
-          select.onclick = function(){
-                menu.style.display = "block"; 
-              
-        }
-        for(var i =0 ;i <games.length;i++)
-            games[i].onclick = function(){
-                select.innerText= this.innerText ;
+            var menu = document.getElementById("sub");
+            var select = document.getElementById("select");
+            var games = menu.children;
+            select.onclick = function (e) {
+                // 再次点击 自动收起
+                // 判断当前是否是block是就改成none 否则改为block
+                menu.style.display == "block" ? menu.style.display = "none" : menu.style.display = "block";
+                e.stopPropagation();
             }
-        document.onclick = function(e){
-            if(e.target == select){
-                return;
+
+            document.onclick = function (e) {
+                // 将点击li的事件委托给父级
+                if (e.target.tagName.toLowerCase() == "li") {
+                    select.innerHTML = e.target.innerHTML;
+                }
+                menu.style.display = "none";
             }
-            menu.style.display = "none"; 
         }
-        }
-       
+
     </script>
 </head>
 

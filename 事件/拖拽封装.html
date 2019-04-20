@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+</head>
+<style>
+        #box {
+                width: 200px;
+                height: 200px;
+                background: #eeaaaa;
+                position: absolute;
+                top: 100px;
+                left: 100px;
+
+        }
+</style>
+
+
+<body>
+        解决页面元素拖拽，包括弹出框、验证码，移动目标位置，放大镜等问题
+        <div id="box"></div>
+</body>
+<script src="../drag.js"></script>
+<script>
+        var box = document.getElementById("box");
+        var stop = draggable(box, { y: false });
+        //鼠标在页面的位置 = 被卷去的部分+可视区域部分。
+</script>
+</html>
