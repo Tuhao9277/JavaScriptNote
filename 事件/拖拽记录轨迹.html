@@ -83,7 +83,7 @@
                     tail.push({x:_left<0?0:_left,y:_top<0?0:_top});
                    
                     box.style.left= Math.min(Math.max(_left,0),window.innerWidth - box.offsetWidth)+"px";
-                    box.style.top= Math.min(Math.max(_top,0),window.innerHeight - box.offsetTop)+"px";
+                    box.style.top= Math.min(Math.max(_top,0),window.innerHeight )+"px";
                     posx.innerHTML = getComputedStyle(box).left;
                     posy.innerHTML =  getComputedStyle(box).top;
                 }
