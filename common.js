@@ -95,8 +95,68 @@ function getClassName(className, element) {
         }
     }
 }
-function $(id) {
-    return document.getElementById(id);
+/**
+ * 
+ * @param {*} selector 选择器
+ * 
+ */
+function $(selector) {
+    var startWith = "";
+    if (/^#/.test(selector))
+        startWith = "id";
+
+    else if (/^\./.test(selector))
+        startWith = "class";
+
+    else if (/^[^#\.]/.test(selector))
+        startWith = "tagname";
+
+    //Match 匹配 属性选择器
+    if (/\[\w+=.+?\]/.test(selector)) {
+        var arr = selector.match(/(.+?)\[(\w+)=(.+?)\]/);
+        var _selec = arr[1];
+        var prop = arr[2];
+        var properal = arr[3];
+        var elelist = null;
+        if (/^#/.test(_selec)) {
+            return _id(_selec);
+        }
+        else if ((/^\./).test(_selec)) {
+            elelist = Array.from(document.getElementsByClassName(_selec));
+            return elelist.filter(function (val, index) {
+                return val[prop] == properal;
+            })
+        }
+        else if (/^[^#\.]/.test(_selec)) {
+            elelist = Array.from(document.getElementsByTagName(_selec));
+            return elelist.filter(function (val, index) {
+                return val[prop] == properal;
+            })
+        }
+    }
+
+    switch (startWith) {
+        case "id": {
+           
+            return _id(selector.substring(1));
+        }
+        case "class": {
+       
+            return _class(selector.substring(1));
+        }
+        case "tagname": {
+            return _tag(selector);
+        }
+    }
+    function _id(id) {
+        return document.getElementById(id);
+    }
+    function _class(classname) {
+        return document.getElementsByClassName(classname);
+    }
+    function _tag(tagname) {
+        return document.getElementsByTagName(tagname);
+    }
 }
 
 function getPosX(ele) {
