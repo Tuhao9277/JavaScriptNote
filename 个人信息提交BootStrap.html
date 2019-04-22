@@ -2,57 +2,215 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
-    <script src="form2table.js"></script>
-    <style type="type/css">
-        a{
-            color:#fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+
+
+  <style type="type/css">
+
+  </style>
 </head>
 
 <body>
-    <div class="cantainer">
-        <div class="row">
-            <div class="col-lg-5 ">
-                    <form>
-                            <div class="form-group">
-                              <label for="inputEmail3">Email address</label>
-                              <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                              <label for="inputPassword3">Password</label>
-                              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                    <label for="inputProgram33">Programmer</label>
-                                    <input type="text" class="form-control" id="inputProgram33" placeholder="Programmer">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputAddress3">Address</label>
-                                    <input type="address" class="form-control" id="inputAddress3" placeholder="Address">
-                                  </div>
-    
-                            
-                            <div id="btn"  class="btn btn-danger">Submit</div>
-                          </form>
-             
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3">
+        <div class="page-header">
+          <h1>表单 <small>Subtext for header</small></h1>
         </div>
+        <form action="www.baidu.com" class="form-vertical" id="myform">
+          <div class="form-group ">
+            <div class="input-group">
+              <div class="input-group-addon">用户姓名</div>
+              <input type="text" class="form-control" placeholder="长度在4,10之间,只能使用数字字母">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">登陆密码</div>
+              <input type="password" class="form-control" placeholder="要求不能少于6位">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="btn-group">
+                <button class="btn btn-primary">密码强度</button>
+                <a class="btn btn-default mimaqiangdu">&nbsp;&nbsp;弱&nbsp;&nbsp;</a>
+                <a class="btn btn-default mimaqiangdu">&nbsp;&nbsp;中&nbsp;&nbsp;</a>
+                <a class="btn btn-default mimaqiangdu">&nbsp;&nbsp;强&nbsp;&nbsp;</a>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">邮件地址</div>
+              <input type="email" class="form-control" placeholder="格式: xxx@xxx.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">联系电话</div>
+              <input type="text" class="form-control" placeholder="11位手机号">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">身份证件</div>
+              <input type="text" class="form-control" placeholder="请输入身份证">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">家庭住址</div>
+              <input type="text" class="form-control" placeholder="">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">邮政编码</div>
+              <input type="text" class="form-control" placeholder="不能以0开头,共6位">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">出生年月</div>
+              <input type="text" class="form-control" placeholder="格式: xxxx-xx-xx">
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-    <table id="table-data" class="table table-striped">
-            <tr >
-                <th>Email</th>
-                <th>Password</th>
-                <th>Programmer</th>
-                <th>Address</th>
-                <th>Function</th>
-            </tr>
-          </table>
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3">
+        <div class="col-lg-4 col-lg-offset-2">
+          <a id="reg" class="btn btn-primary center-block">注册</a>
+        </div>
+        <div class="col-lg-4">
+          <a class="btn btn-default center-block">重置</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
+<script>
+  var regBtn = document.getElementById("reg");
+  var inputs = Array.from(document.getElementsByTagName("input"));
+  var strength = Array.from(document.getElementsByClassName("mimaqiangdu"));
+  var myform = document.getElementById("myform");
+  var pass ={
+    usname :false,
+    psw:false,
+    email:false,
+    tel:false,
+    post:false,
+    birth:false
+  }
+
+  // 检测用户名
+  inputs[0].addEventListener("blur", function () {
+    if (/^[A-Za-z0-9]{4,15}$/.test(this.value)) {
+      console.log("success!")
+      this.parentNode.parentNode.className = "form-group  has-success";
+      pass.usname = true;
+    } else {
+      console.log("error!")
+      this.parentNode.parentNode.className = "form-group  has-error";
+      pass.usname = false;
+    }
+  })
+  // 检测密码
+  inputs[1].addEventListener("input", function () {
+    var val = this.value;
+    if (/[^A-Za-z0-9]/.test(val)) {
+   
+      strength[2].className = "btn btn-success mimaqiangdu";
+      strength[1].className = "btn btn-default mimaqiangdu";
+      strength[0].className = "btn btn-default mimaqiangdu";
+      
+    }
+    else if (/[A-Za-z]/.test(val) && /[0-9]/.test(val)) {
+      strength[2].className = "btn btn-default mimaqiangdu";
+      strength[1].className = "btn btn-warning mimaqiangdu";
+      strength[0].className = "btn btn-default mimaqiangdu";
+    }
+    else {
+      strength[2].className = "btn btn-default mimaqiangdu";
+      strength[1].className = "btn btn-default mimaqiangdu";
+      strength[0].className = "btn btn-danger mimaqiangdu";
+    }
+  })
+  inputs[1].addEventListener("blur",function(){
+    if(this.value.length >5){
+      this.parentNode.parentNode.className = "form-group  has-success";
+      pass.psw = true;
+    }else{
+      this.parentNode.parentNode.className = "form-group  has-error";
+      pass.psw = false;
+    }
+  })
+  // 验证邮箱
+  inputs[2].addEventListener("blur", function () {
+    if (/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+([a-zA-z]{2,4})$/.test(this.value)) {
+      this.parentNode.parentNode.className = "form-group  has-success";
+      pass.email = true;
+    } else {
+      this.parentNode.parentNode.className = "form-group  has-error";
+      pass.email = false;
+    }
+  })
+  // 验证手机
+  inputs[3].addEventListener("blur", function () {
+    if (/^1[3-8]\d{9}$/.test(this.value)) {
+      this.parentNode.parentNode.className = "form-group has-success";
+      pass.tel = true;
+
+    } else {
+      this.parentNode.parentNode.className = "form-group has-error"
+      pass.tel = false;
+    }
+  })
+  // 邮政
+  inputs[6].addEventListener("blur", function () {
+    if (/^[^0]\d{5}$/.test(this.value)) {
+    this.parentNode.parentNode.className = "form-group has-success";
+     pass.post = true;
+
+    } else {
+      this.parentNode.parentNode.className = "form-group has-error"
+      pass.post = false;
+    }
+  })
+  inputs[7].addEventListener("blur", function () {
+    if (/^([1|2][0-9]{3})-(([0][1|3|5|7|8]|(10|12))-([0][1-9]|[1|2][0-9]|(30|31)))|(([0][2|4|6|9]|(11))-([0][1-9]|[1|2][0-9]|(30)))$/.test(this.value)) {
+
+      this.parentNode.parentNode.className = "form-group has-success";
+      pass.birth = true;
+    } else {
+      this.parentNode.parentNode.className = "form-group has-error"
+      pass.birth = false;
+    }
+  })
+
+
+
+  regBtn.addEventListener("click", function () {
+    var res = Object.values(pass);
+    // Object.keys() // 取出所有属性
+    var val = res.some(function (item) {
+      return item == false;
+      if (val) {
+        alert("error!")
+      } else {
+        //commit
+      }
+    })
+  })
+
+  //注册前校验
+</script>
 
 </html>

@@ -79,7 +79,7 @@
     //单词替换
     let reg = /b(a|e|i|o|u)g/gi;
     let str = "bagbegbigbogbug".replace(reg,"bug");
-    console.log(str);
+  //  console.log(str);
 }
 {
     // 修改所有foo方法的实例
@@ -94,4 +94,22 @@
 {
     //重复->替换
     let reg = /(\s*really\s*)/g;  // \b 检测单词边界
+}
+{
+   let reg = /^[A-Za-z0-9]{4,15}$/;
+  // console.log(reg.test("21"));
+}
+{
+
+
+    // console.log(null == undefined) // true
+    // console.log(null === undefined) // false
+    // console.log(typeof(new Object()) == typeof(null)) // true
+    // console.log(new Number('1') == 1) // true
+    // console.log(new Number('1') === 1) // false
+    // console.log(new Object('1') == 1) // true
+    // console.log(new Object('1') === 1) // false
+    // console.log(new Boolean() == false) // true
+    // console.log(new Boolean() === true) // false
+
 }

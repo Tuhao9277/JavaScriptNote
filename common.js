@@ -97,7 +97,7 @@ function getClassName(className, element) {
 }
 /**
  * 
- * @param {*} selector 选择器
+ * @param {*} selector 选择器，可以为id，class，TagName，属性
  * 
  */
 function $(selector) {
@@ -113,24 +113,24 @@ function $(selector) {
 
     //Match 匹配 属性选择器
     if (/\[\w+=.+?\]/.test(selector)) {
-        var arr = selector.match(/(.+?)\[(\w+)=(.+?)\]/);
-        var _selec = arr[1];
-        var prop = arr[2];
-        var properal = arr[3];
-        var elelist = null;
+        var arr = selector.match(/(.+?)\[(\w+)=(.+?)\]/); //为属性选择器各部分分组
+        var _selec = arr[1];    // id、class、TagName
+        var prop = arr[2];      // property
+        var value = arr[3];     // 属性值
+        var elelist = null;     // 存放满足条件的标签
         if (/^#/.test(_selec)) {
-            return _id(_selec);
+            return _id(_selec); //如果开头为id选择器，则直接返回getId
         }
         else if ((/^\./).test(_selec)) {
             elelist = Array.from(document.getElementsByClassName(_selec));
             return elelist.filter(function (val, index) {
-                return val[prop] == properal;
+                return val[prop] == value;
             })
         }
         else if (/^[^#\.]/.test(_selec)) {
             elelist = Array.from(document.getElementsByTagName(_selec));
             return elelist.filter(function (val, index) {
-                return val[prop] == properal;
+                return val[prop] == value;
             })
         }
     }
