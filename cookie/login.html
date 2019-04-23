@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        body {
+            background-color: rgb(177, 208, 224);
+            font: normal 12px Trebuchet MS;
+            color: #000;
+        }
+
+        .roundedCorners {
+            width: 220px;
+            padding: 10px;
+            background-color: #DDEEF6;
+            box-shadow: 0px 0px 10px 0px #888888;
+            border: 1px solid #DDEEF6;
+            border-radius: 6px;
+            margin: auto;
+        }
+
+        .roundedCorners-textbox {
+            border: 1px solid #999;
+            width: 160px;
+        }
+
+        .checkbox {
+            margin-left: 30px;
+            border: 1px solid #999;
+            width: 20px;
+        }
+    </style>
+</head>
+<script src="../common.js"></script>
+<script>
+    function addCookie(key, value, days) {
+        var now = new Date();
+        now.setDate(now.getDate() + days);
+        document.cookie = key + "=" + value + ";" + "expires=" + now;
+    }
+
+    function getCookie(key) {
+        // 获取，分割，遍历，再分割，判断
+        var cookiestr = document.cookie;
+        var list = cookiestr.split("; ");
+        for (var i = 0; i < list.length; i++) {
+            var kv = list[i].split("=");
+            if (kv[0] == key) return kv[1];
+        }
+        return null;
+    }
+
+    window.onload = function () {
+        // 获取复选框
+        var saveNP = $(".checkbox")[0];
+        // 获取提交按钮，添加点击事件
+        var btn = $("#submitbtn");
+        // 先尝试从浏览器获取cookie
+        $("#username").value = getCookie("username");
+        $("#password").value = getCookie("password");
+        btn.addEventListener("click", function () {
+            var username = $("#username");
+            var password = $("#password");
+            // 如果勾选免登录
+            if (saveNP.checked) {
+                // 登录后，添加用户信息到cookie中
+                addCookie("username", username.value, 10);
+                addCookie("password", password.value, 10);
+            }
+        })
+
+
+    }
+</script>
+
+<body>
+    <form action="http://www.baidu.com" method="get">
+        <div class="roundedCorners">
+            <label>账号</label>&nbsp;
+            <input id="username" type="text" class="roundedCorners-textbox" /><br /><br />
+            <label>密码</label>&nbsp;
+            <input id="password" type="text" class="roundedCorners-textbox" /><br /><br />
+            <input name="saveNP" type="checkbox" class="checkbox" />
+            <label>10天内免登陆</label>
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="确定" id="submitbtn"></input>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="reset" value="清空" />
+        </div>
+    </form>
+</body>
+
+</html>

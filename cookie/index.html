@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket-插座</title>
+</head>
+
+<body>
+    网络通信模型
+    A发送 管道 1 B接收
+    A接收 管道 2 B发送
+</body>
+<script>
+    document.cookie = "username=tuhao;expired=";
+    alert(document.cookie); // 代码删除后，document.cookie仍在浏览器中
+    function addCookie(key, value, days) {
+        var now = new Date();
+        now.setDate(now.getDate + days);
+        document.cookie = key +"="+value +";"+"expire:"+now;
+    }
+    function getCookie(key) {
+        var str = document.cookie;
+        var list = str.split(";");
+        for (const i in list) {
+            var kv = list[i];
+
+            if (kv.split('=')[0] == key)
+                return kv.split('=')[1];
+
+        }
+    }
+</script>
+
+</html>
