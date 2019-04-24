@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>运动</title>
+</head>
+<style>
+    html,body{
+        margin: auto;
+        height: 100%;
+        overflow: hidden;
+    }
+    #box {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 50px;
+        top: 100px;
+        border-radius: 50%;
+        background-color: #db1050;
+    }
+</style>
+<script>
+    onload = function () {
+        var box = document.getElementById("box");
+        // 设置速度
+        var speedx = 10;
+        var speedy = -5;
+        
+        // 得到目标属性
+        var _left = box.offsetLeft,
+            _top = box.offsetTop,
+            _width = box.offsetWidth,
+            _height = box.offsetHeight;
+        
+        // 在定时器中计算运动
+        var t = setInterval(function () { 
+            _top += speedy++;
+            _left += speedx;
+            box.style.left = _left+"px";
+            box.style.top = _top+"px";
+            
+            if(_top > window.innerHeight -_height){
+                box.style.top  = window.innerHeight - _height+"px";
+                speedy*=-0.825;
+                if(Math.abs(speedy)<1){
+                    speedy = 0;
+                }
+               
+            }
+            if(box.offsetLeft > window.innerWidth - box.offsetWidth){
+                    box.style.left=window.innerWidth - box.offsetWidth+"px";
+                    speedx *= -1;
+                   
+                }
+                if(box.offsetLeft<0){
+                    box.style.left=0;
+                    speedx *= -1;
+                }
+              
+         },30)
+    }
+</script>
+
+<body>
+    <div id="box">
+    </div>
+</body>
+
+</html>

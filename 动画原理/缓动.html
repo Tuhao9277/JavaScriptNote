@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    html,
+    body {
+        margin: auto;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #box {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 0;
+        top: 100px;
+        border-radius: 50%;
+        background-color: #db1050;
+    }
+    #box2 {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 0;
+        top: 200px;
+        border-radius: 50%;
+        background-color: #00eb89;
+    }
+    .line>div{
+        
+        opacity: 0.5;
+        mix-blend-mode:overlay;
+    }
+    .line2>div{
+        
+        opacity: 0.5;
+        mix-blend-mode:overlay;
+    }
+
+    .wall {
+        position: absolute;
+        width: 1px;
+        height: 800px;
+        left: 900px;
+        top: 0;
+
+        background-color: #db1050;
+    }
+    .container{
+       
+        position: absolute;
+        top: 80px;
+        left: 20px;
+    }
+    p{
+        margin-bottom: 100px;
+    }
+    
+</style>
+<script src="../animate.js"></script>
+<script>
+    onload = function () {
+        document.que
+        var box = document.getElementById("box");
+        var line = document.getElementsByClassName("line")[0];
+        var line2 = document.getElementsByClassName("line2")[0];
+        
+        // 简单缓动 ，使用步长的方法
+        easyEaseMotion(box,{left:900},line);
+        // 复杂缓动，使用正弦函数
+        
+        sinMotion(box2,{left:900},line2);
+
+    }
+</script>
+
+<body>
+    <div class="container" color="red">  
+        <p>步长</p>
+        <p>正弦</p>
+    </div>
+      
+    <div id="box">
+    </div>
+    <div id="box2"></div>
+    <div class="wall"></div>
+    <div class="line"></div>
+    <div class="line2"></div>
+</body>
+
+</html>

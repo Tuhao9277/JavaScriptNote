@@ -1,15 +1,9 @@
 /**
  * 
  * @param {Element} ele 元素
- * @param {{x,y,limit}} options 拖拽方向,活动范围是否限制在其父级元素内
- * @param {number} paddingLeft 增加填充，进一步缩小活动范围
- * @param {number} paddingRight 增加填充，进一步缩小活动范围
- * @param {number} paddingTop 增加填充，进一步缩小活动范围
- * @param {number} paddingBottom 增加填充，进一步缩小活动范围
- * @param {number} marginLeft 消除由于margin带来的拖拽误差
- * @param {number} marginTop 消除由于margin带来的拖拽误差
+ * @param {{x,y,limit,paddingLeft ,paddingRight,paddingTop,paddingBottom,marginLeft, marginTop }} options 拖拽方向,活动范围是否限制在其父级元素内
  */
-function draggable(ele, options, paddingLeft, paddingRight, paddingTop, paddingBottom, marginLeft, marginTop, ) {
+function draggable(ele, options) {
     // options有以下几种情况：
     // 未传值（不存在），参数类型不为Boolean：为空，未定义，为其他类型
     // 首先检验是否传值，未传值，则设默认x，y为true
