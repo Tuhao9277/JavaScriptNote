@@ -7,24 +7,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #image {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: #db1050;
+    }
+</style>
+<script src="../../drag.js"></script>
+<script src="../../cookie.js"></script>
 <script>
     onload = function () {
         var image = document.getElementById("image");
         // 获取cookie中的坐标
-        var pos = getCookie("photo");
+        
+     
+        image.style.left = (getCookie("left") ? getCookie("left") : 0) + "px";
+        image.style.top = (getCookie(" top") ? getCookie(" top") : 0) + "px";
 
-        try {
-            image.offsetLeft = pos.x + "px";
-            imgae.offsetTop = pox.y + "px";
-        } catch (error) {
-
+        image.addEventListener("mousedown", move);
+        function move(e) {
+               var e = e || event;
+            offX = e.offsetX;
+            offY = e.offsetY;
+            document.addEventListener("mousemove",start )
+            
         }
+        function start(e) {
+                       var e = e || event;
+                _left = e.clientX + document.body.scrollLeft - offX;
+                _top = e.clientY + document.body.scrollTop - offY;
+                image.style.left = Math.min(Math.max(_left, 0), window.innerWidth - image.offsetWidth) + "px";
+                image.style.top = Math.min(Math.max(_top, 0), window.innerHeight - image.offsetTop) + "px";
+            }
+        document.addEventListener("mouseup", function () {
+          
+            addCookie("left",image.offsetLeft,10);
+            addCookie("top",image.offsetTop,10);
+             document.removeEventListener("mousemove",start)
+            
+        })
+
 
     }
 </script>
 
 <body>
-
+    <div id="image"></div>
 </body>
 
 </html>

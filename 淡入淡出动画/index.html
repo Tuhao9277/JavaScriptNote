@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #img {
+        background: #db1050;
+        width: 200px;
+        height: 150px;
+        opacity: 0.5;
+    }
+</style>
+<script>
+    onload = function () {
+        var oImg = document.getElementById("img");
+        let t = null;
+        oImg.addEventListener("mouseover", function () {
+            console.log("over!")
+            clearInterval(t);
+             t = setInterval(function() {
+                oImg.style.opacity =  Number(getComputedStyle(oImg).opacity) +0.01;
+                if(  oImg.style.opacity == 1){
+                    clearInterval(t);
+                }
+            }, 30);
+
+        })
+        oImg.addEventListener("mouseout", function () {
+            console.log("out!")
+            clearInterval(t);
+             t = setInterval(function() {
+                oImg.style.opacity =  Number(getComputedStyle(oImg).opacity) -0.01;
+                if(  oImg.style.opacity == 0.5){
+                    clearInterval(t);
+                }
+            }, 30);
+        })
+    }
+</script>
+
+<body>
+    <div id="img">
+
+    </div>
+</body>
+
+</html>
