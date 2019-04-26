@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #box {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #0ee9a7;
+    }
+
+    #box2 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #db1050
+    }
+</style>
+<script>
+    onload = function () {
+        var box = document.getElementById("box");
+        var box2 = document.getElementById("box2");
+        var x, b;
+        var start = {
+            x: box.offsetLeft,
+            y: box.offsetTop
+        }
+        // var para = -2 * x * x + b;
+
+        var move = {
+            x: box2.offsetLeft - start.x,
+            y: start.y - box2.offsetTop
+        }
+        var a = -0.0015;
+        b = (move.y + a * move.x * move.x) / move.x;
+        var speed = 0;
+
+        var t = setInterval(function () {
+            speed += 8;
+            var speedy = a * speed * speed + b * speed;
+            box.style.left = speed + start.x + "px";
+            box.style.top = start.y - speedy+"px"
+            if (speed>=move.x) {
+                box.style.left =  box2.offsetLeft+ "px";
+                box.style.top = start.y -  box2.offsetTop+"px"
+                clearInterval(t);
+            }
+        }, 30)
+    }
+</script>
+
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> </title>
+
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #box {
+        margin: auto;
+        width: 810px;
+        height: 320px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    ul.imgs {
+        list-style: none;
+        width: 4050px;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    ul.imgs li {
+        float: left;
+    }
+
+    ul.nav {
+        list-style: none;
+        position: absolute;
+        right: 50px;
+        bottom: 20px;
+    }
+
+    ul.nav li {
+        float: left;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    ul.nav li.active {
+        background: white;
+    }
+</style>
+<script src="../common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../animate.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    onload = function () {
+        // ul
+        var oUL = $("#box").children[0];
+        // 获取下部按钮
+        var navs = Array.from($(".nav")[0].children);
+        var nav = $(".nav")[0];
+        // 设置计时器
+        var curIndex = 1;
+        var t = setInterval(function () {
+            changeImg();
+            changeTab();
+        }, 2000);
+
+        // 改变图片
+        function changeImg() {
+            animate(oUL, {
+                left: -810 * (curIndex % 5), function() {
+                    if (curIndex % 5 == 4) {
+                        oUL.style.left = 0;
+                        curIndex = 0;
+                    }
+                    curIndex++;
+                }
+            })
+        };
+        // 改变导航
+        function changeTab() {
+            navs.forEach(function (nav, index) {
+                nav.className = (index == count % 4) ? "active" : "";
+            })
+        };
+        // 遍历按钮，添加点击事件
+        navs.forEach(function (nav, index) {
+            nav.addEventListener("click", function () {
+                curIndex = index;
+                changeImg();
+                changeTab();
+            })
+        })
+        oUL.addEventListener("mouseover", function () {
+            clearInterval(t);
+        })
+        oUL.addEventListener("mouseout", function () {
+            t = setInterval(function () {
+                changeImg();
+                changeTab();
+            }, 2000)
+
+        })
+
+
+    }
+</script>
+
+<body>
+    <div id="box">
+        <ul class="imgs">
+            <li>
+                <img src="001.jpg">
+            </li>
+            <li>
+                <img src="002.jpg">
+            </li>
+            <li>
+                <img src="003.jpg">
+            </li>
+            <li>
+                <img src="004.jpg">
+            </li>
+            <li>
+                <img src="001.jpg">
+            </li>
+        </ul>
+
+        <ul class="nav">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <div id="leftBtn" class="leftBtn"></div>
+        <div id="rightBtn" class="rightBtn"></div>
+    </div>
+</body>
+
+</html>
