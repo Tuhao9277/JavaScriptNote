@@ -3,7 +3,7 @@
  * @param {Element} ele 节点名
  * @param {Object} target 目的地
  */
-function easyEaseMotion(ele, target,line) {
+function easyEaseMotion(ele, target,line,times=900) {
     console.log("easyEaseMotion START!");
     clearInterval(ele.t);
     for (let key in target) {
@@ -29,7 +29,7 @@ function easyEaseMotion(ele, target,line) {
  * @param {Element} ele 节点名
  * @param {Object} props 目标
  */
-function sinMotion(ele,props,line){
+function sinMotion(ele,props,line,times=900){
     // 循环获取目标所有的属性
     for (let attr in props) {
         // 获取属性的初值
