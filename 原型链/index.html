@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>原型链</title>
 </head>
+<script>
+//   原型链类
+//     创建对象的三种方法：
+// 对象对应一个实例
+// 被new出来的函数为构造函数，具有一个prototype属性，初始化一个空的原型对象。
+// 原型对象有一个constructor，用来区分是被哪一个函数所引用。保持相互之间的s关联关系
+// 1 字面量
+    var obj = {name:"imooc"};   
+    var obj1 = new Object({name:"imooc"});
+// 2 显式构造函数
+    var M = function(name){this.name = name};
+    var obj2 = new M('obj2');
+    //对象被创建，其__proto__继承M的prototype
+// 3 
+    var P = {name:"p"}; //原型对象
+    var obj3 = Object.create(P); // 是用原型链连接的，name属性不在obj3上
+
+    // 函数才拥有prototype,M.prototype
+    // 只有对象才有__proto__,如obj1,obj2,obj3 (函数也是对象)
+    M.prototype.say = function(){
+        console.log("I'm been created!");
+    }
+// 实例对象由构造函数所生成，对象的__proto__关联构造函数中prototype所引用的原型对象  
+// 二者是否关联（__proto__和prototype是否引用的同一个地址），通过instance检验
+// obj2 instanceof Object/M  => true
+    function hello(thing){
+        console.log(this+" say: "+thing);
+    }
+    hello.call("WuLei","GOAL");
+</script>
 <body>
+  
     
 </body>
 </html>
