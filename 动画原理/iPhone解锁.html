@@ -25,32 +25,36 @@
         position: absolute;
         width: 93px;
         height: 62px;
+        left:0;
         cursor: pointer;
         background: url(unlock_btn.jpg) no-repeat;
     }
 </style>
 <script src="drag.js" type="text/javascript" charset="utf-8"></script>
-<script src="animate.js"></script>
+<script src="../animate.js"></script>
 <script src="../common.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     window.onload = function () {
         var btn = document.getElementById("lock").children[0];
         var main = document.getElementById("iphone").children[0];
-        draggable(btn,{x:true,y:false,limit:true,});
-        document.addEventListener("mouseup",function () {
-            if(btn.offsetLeft >133){
-            // 到终点，执行后续操作
-            animate(btn,{left:btn.parentNode.offsetWidth - btn.offsetWidth },function(){
-                console.log("123");
-            })
-        }
-        else{
-            // 到起点
-            animate(btn,{left:0})
-        }
-            
+        draggable(btn, { x: true, y: false, limit: true, });
+        btn.addEventListener("mouseup", function () {
+            var that = this;
+            if (btn.offsetLeft > 133) {
+                // 到终点，执行后续操作
+                animate(btn, {left: btn.parentNode.offsetWidth-btn.offsetWidth}, function () {
+                    btn.remove();
+                    // that.remove();
+                    animate(main,{opacity:1});
+                }.bind(this));
+            }
+            else {
+                // 到起点
+                animate(btn, { left: 0 })
+            }
+
         })
-      
+
     }
 
 </script>
