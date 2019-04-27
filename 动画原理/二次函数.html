@@ -10,16 +10,29 @@
 <style>
     #box {
         position: absolute;
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
+        left: 10px;
+        top: 200px;
         border-radius: 50%;
         background: #0ee9a7;
+    }
+    #line div{
+        position: absolute;
+        left: 10px;
+        top: 200px;
+        border-radius: 50%;
+        background: #0ee9a7;
+        opacity: 0.2;
+        mix-blend-mode:overlay;
     }
 
     #box2 {
         position: absolute;
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
+        left: 945px;
+        top:380px;
         border-radius: 50%;
         background: #db1050
     }
@@ -28,29 +41,30 @@
     onload = function () {
         var box = document.getElementById("box");
         var box2 = document.getElementById("box2");
+        var line = document.getElementById("line");
         var x, b;
-        var start = {
+        var centerpoint = {
             x: box.offsetLeft,
             y: box.offsetTop
         }
         // var para = -2 * x * x + b;
 
-        var move = {
-            x: box2.offsetLeft - start.x,
-            y: start.y - box2.offsetTop
+        var target = {
+            x: box2.offsetLeft - centerpoint.x,
+            y: centerpoint.y - box2.offsetTop
         }
         var a = -0.0015;
-        b = (move.y + a * move.x * move.x) / move.x;
-        var speed = 0;
+        b =  (target.y - a * target.x * target.x) / target.x;
+        var _x = 0;
 
         var t = setInterval(function () {
-            speed += 8;
-            var speedy = a * speed * speed + b * speed;
-            box.style.left = speed + start.x + "px";
-            box.style.top = start.y - speedy+"px"
-            if (speed>=move.x) {
+            _x += 8;
+            var _y = a * _x * _x + b * _x;
+            box.style.left = _x + centerpoint.x + "px";
+            box.style.top = centerpoint.y - _y+"px"
+            if (_x> target.x) {
                 box.style.left =  box2.offsetLeft+ "px";
-                box.style.top = start.y -  box2.offsetTop+"px"
+                box.style.top =  box2.offsetTop+"px"
                 clearInterval(t);
             }
         }, 30)
@@ -60,6 +74,7 @@
 <body>
     <div id="box"></div>
     <div id="box2"></div>
+    <div id="line"></div>
 </body>
 
 </html>

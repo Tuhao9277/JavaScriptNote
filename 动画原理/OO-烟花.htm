@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.addEventListener("mousedown",function(e){
+        e = e||event;
+        var coord ={
+            x:e.clientX,
+            y:e.clientY
+        }
+        var f = Fire(coord);
+        f.init();
+        f.launch();
+        
+        });
+
+       
+        function Fire(coord){
+            this.init = function(){
+                this.ele = document.createElement("");
+                this.ele.style.left = coord.x;
+
+            }
+            this.launch = function(){}
+            this.boom  =function(){
+               this.destory();
+               for (let index = 0; index < array.length; index++) {
+                  
+                   var s = new Spark();
+                    s.parabloa();
+               }
+
+            }
+            this.destory = function(){
+
+            }
+        }
+        function Spark(){
+            this.init = function(){
+
+            };
+            this.parabloa = function(){
+
+            };
+            this.destory = function(){
+
+            }
+        }
+       
+
+    </script>
+</body>
+</html>
+

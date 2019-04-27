@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            position: relative;
+            width: 700px;
+            height: 800px;
+            margin: 0 auto;
+            border: 1px solid #F00;
+        }
+
+        .dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #F00;
+        }
+
+        .box {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #a9ee0a;
+           
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+</head>
+<script>
+
+
+    onload = function () {
+        var redius = 200;
+        // 每一部分对应角度
+        var avd = 360 / $(".box").length;
+
+        // 每一部分对应弧度
+        var ahd = avd * Math.PI / 180;
+        //中心点横坐标
+        var dotLeft = ($(".container").width() - $(".dot").width()) / 2;
+        //中心点纵坐标
+        var dotTop = ($(".container").height() - $(".dot").height()) / 2;
+        $(".dot").css({ "left": dotLeft, "top": dotTop });
+        $(".box").each(function (index, element) {
+            // element == this
+            $(this).css({
+                "left": Math.sin(index * ahd) * redius + dotLeft,
+                "top": Math.cos(index * ahd) * redius + dotTop
+            });
+        });
+    }
+</script>
+
+<body>
+    <div class="container">
+        <div class="dot"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+
+</html>

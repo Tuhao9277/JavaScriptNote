@@ -16,7 +16,7 @@
     var obj = {name:"imooc"};   
     var obj1 = new Object({name:"imooc"});
 // 2 显式构造函数
-    var M = function(name){this.name = name};
+    var M = function(name){this.name = name}; // this指向new M（'obj');
     var obj2 = new M('obj2');
     //对象被创建，其__proto__继承M的prototype
 // 3 

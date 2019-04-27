@@ -66,6 +66,9 @@ function randomColor() {
     return "#" + addZero(r) + addZero(g) + addZero(b);
 
 }
+function randomInt(start, end) {
+    return parseInt(Math.min(start, end) + Math.floor(Math.random * (end - start)));
+}
 /**
  * 
  * @param {Dom} ele dom元素
@@ -137,11 +140,11 @@ function $(selector) {
 
     switch (startWith) {
         case "id": {
-           
+
             return _id(selector.substring(1));
         }
         case "class": {
-       
+
             return _class(selector.substring(1));
         }
         case "tagname": {
