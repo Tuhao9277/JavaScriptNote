@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/iconfont.css">
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #box{
+        width: 375px;
+        height: 667px;
+        background: #20031f;
+        position: absolute;
+    }
+    .zan{
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        right: 50px;
+        bottom: 0;
+    }
+    
+</style>
+<script src="../common.js"></script>
+<body>
+    <div id="box">
+
+    </div>
+</body>
+<script>
+    var box = document.getElementById("box");
+    document.addEventListener("click", function () {
+        new Zan().init().bubble();
+    })
+    function Zan() {
+
+    }
+    Zan.prototype = {
+        init: function () {
+            this.el = document.createElement("div");
+            this.el.className = "zan iconfont icon-zan";
+            //随机颜色
+            this.el.style.color = randomColor();
+            // 随机字体大小
+            this.el.style.fontSize = randomInt(14,50) +"px";
+            this.appendTo(box);
+            return this;
+        },
+        appendTo: function (target) {
+            target.appendChild(this.el);
+        },
+        bubble: function () {
+            // 初始
+            // 振幅
+            this.x =1;
+            this.range = randomInt(5,51);
+            this.speed = randomInt(5,10);
+
+            this.timer = setInterval(function () {
+                this.y = Math.sin(this.x * Math.PI / 180) * this.speed;
+                this.x+= this.speed;
+                this.el.style.right= this.y +50+"px";
+                this.el.style.bottom =this.x+"px";
+                if( this.el.style.top<0){
+                    this.stop();
+                }
+            }.bind(this), 30)
+            
+        },
+        stop :function(){
+            clearInterval(this.timer);
+            this.ele.remove();
+        }
+       
+
+
+    }
+
+</script>
+
+</html>

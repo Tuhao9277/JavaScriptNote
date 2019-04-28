@@ -1,7 +1,7 @@
 //animate( obj, {left: 300, width: 400})
 function animate(ele, options, callback){
 	if(ele.isMoving) return;
-	
+	ele.cbk = callback;
 	ele.isMoving = true;
 	for(var attr in options) {
 		(function(prop){
@@ -30,14 +30,13 @@ function animate(ele, options, callback){
 				if(parseInt(getStyle(ele)[prop]) == targetvalue) {
 					clearInterval(ele[prop+"-timer"]);
 					if(isAllover()) {
-						callback ? callback() : "";
+						ele.cbk ? ele.cbk() : "";
 					}
 				}
 			}, 30);
 			
 		})(attr);
 	}
-	
 	function isAllover() {
 		var flag = true;
 		for(var attr in options) {
@@ -55,6 +54,10 @@ function animate(ele, options, callback){
 		return flag;
 	}
 }
+
+
+	
+
 
 
 function getStyle(ele){
