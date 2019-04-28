@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #box {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        left: 100px;
+        top: 100px;
+        border-radius: 50%;
+        background-color: #db1050;
+    }
+   #dot{
+    position: absolute;
+   }
+   #container{
+       position: absolute;
+       width: 400px;
+       height: 400px;
+       border: 1px solid #356423;
+   }
+</style>
+
+<body>
+    <div id="container">
+    <div id="box"></div>
+    <div id="dot">·</div>
+</div>
+</body>
+<script>
+    var box = document.getElementById("box");
+    var container = document.getElementById("container");
+    // 中心点
+    var center = {
+        left: (container.offsetWidth-box.offsetWidth)/2,
+        height: (container.offsetHeight-box.offsetHeight)/2
+    }
+    var r=center.left;
+    var degree = 0;
+    dot.style.left = container.offsetWidth/2 + "px";
+    dot.style.top =  container.offsetHeight/2 + "px";
+    var timer = setInterval(function (param) {
+        var x = Math.cos(degree * Math.PI / 180)*r,
+            y = Math.sin(degree * Math.PI / 180)*r;
+        box.style.left = x + center.left+ "px";
+        box.style.top = y + center.height  +"px";
+        degree+=2;
+    }, 30)
+</script>
+
+</html>
