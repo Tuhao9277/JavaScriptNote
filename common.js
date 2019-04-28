@@ -66,8 +66,8 @@ function randomColor() {
     return "#" + addZero(r) + addZero(g) + addZero(b);
 
 }
-function randomInt(start, end) {
-    return parseInt(Math.min(start, end) + Math.floor(Math.random * (end - start)));
+function randomInt(min, max){
+	return Math.floor(Math.random()*(max-min)) + min;
 }
 /**
  * 

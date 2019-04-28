@@ -1,60 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-    <script>
-        document.addEventListener("mousedown",function(e){
-        e = e||event;
-        var coord ={
-            x:e.clientX,
-            y:e.clientY
+<style>
+   html,
+    body {
+        overflow: hidden;
+    }
+
+    body,
+    div,
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: #000;
+        font: 12px/1.5 arial;
+        color: #7A7A7A;
+    }
+
+    a {
+        text-decoration: none;
+        outline: none;
+    }
+
+    #tips,
+    #copyright {
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        background: #171717;
+        border: 2px solid #484848;
+    }
+
+    #tips {
+        top: 0;
+        border-width: 0 0 2px;
+    }
+
+    #tips a {
+        font: 14px/30px arial;
+        color: #FFF;
+        background: #F06;
+        display: inline-block;
+        margin: 10px 5px 0;
+        padding: 0 15px;
+        border-radius: 15px;
+    }
+
+    #tips a.active {
+        background: #FE0000;
+    }
+
+    #copyright {
+        bottom: 0;
+        line-height: 50px;
+        border-width: 2px 0 0;
+    }
+
+    #copyright a {
+        color: #FFF;
+        background: #7A7A7A;
+        padding: 2px 5px;
+        border-radius: 10px;
+    }
+
+    #copyright a:hover {
+        background: #F90;
+    }
+
+    p {
+        position: absolute;
+        top: 55px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .fire {
+        width: 3px;
+        height: 50px;
+        background: white;
+        position: absolute;
+    }
+
+    .spark {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+    }
+</style>
+    <body>
+        <div id="tips"><a id="manual" href="javascript:;" class="active">手动放烟花</a><a id="auto" href="javascript:;" class="">自动放烟花</a><a id="stop" href="javascript:;" class="">停止放烟花</a></div>
+    <p>由于浏览器渲染能力有限, 当浏览器为IE或选择自动放烟花时, 随机生成的烟花碎片范围自动调整至20-30</p>
+    <div id="copyright">建议使用Firefox, Chrome浏览器预览效果. </div>
+    </body>
+    <script src="../animate.js">
+    </script>
+    <script src="../common.js"></script>
+    <script>document.addEventListener("mousedown", function (e) {
+        e=e || event;
+
+        // 鼠标位置
+        var coord= {
+            x: e.clientX,
+                y: e.clientY
         }
-        var f = Fire(coord);
+
+        // 初始化
+        var f=new Fire(coord);
         f.init();
         f.launch();
-        
-        });
 
-       
-        function Fire(coord){
-            this.init = function(){
-                this.ele = document.createElement("");
-                this.ele.style.left = coord.x;
+    }
 
-            }
-            this.launch = function(){}
-            this.boom  =function(){
-               this.destory();
-               for (let index = 0; index < array.length; index++) {
-                  
-                   var s = new Spark();
-                    s.parabloa();
-               }
+    );
 
-            }
-            this.destory = function(){
 
-            }
+    function Fire(coord) {
+
+        // 初始化火线
+        this.init=function () {
+            this.ele=document.createElement("div");
+            this.ele.className="fire";
+            this.ele.style.left=coord.x+"px";
+            this.ele.style.top=window.innerHeight+"px";
+            document.body.appendChild(this.ele);
         }
-        function Spark(){
-            this.init = function(){
 
-            };
-            this.parabloa = function(){
+        // 发射
+        this.launch=function () {
+            var that=this;
 
-            };
-            this.destory = function(){
-
+            animate(this.ele, {
+                top: coord.y, height: 3
             }
+
+            , function () {
+                that.boom();
+            }
+
+            )
         }
-       
+
+        // 爆炸，产生spark
+        this.boom=function () {
+            this.destory();
+            for (let index=0;
+            index < randomInt(20, 50);
+
+            index++) {
+                // 初始化spark
+                var s=new Spark(coord);
+                s.init();
+                s.parabloa();
+            }
+
+        }
+
+        this.destory=function () {
+            this.ele.remove();
+        }
+    }
+
+    // 烟花碎片
+    function Spark(coord) {
+        this.init=function () {
+            this.ele=document.createElement("div");
+            this.ele.className="spark";
+            this.ele.style.top=coord.y+"px";
+            this.ele.style.left=coord.x+"px";
+            this.ele.style.background=randomColor();
+            // 为Spark添加speed属性
+            this.speedx=randomInt(-20, 20);
+            this.speedy=randomInt(-20, 20);
+            document.body.appendChild(this.ele);
+        }
+
+        ;
+
+        this.parabloa=function () {
+            var that=this;
+
+            var t=setInterval(function () {
+                that.ele.style.left=that.ele.offsetLeft + that.speedx +"px";
+                that.ele.style.top=that.ele.offsetTop +that.speedy +"px";
+
+                if (that.ele.offsetTop > window.innerHeight) {
+                    that.destory();
+                    clearInterval(t);
+                }
+            }, 30)
+        };
+        this.destory=function () {
+            this.ele.remove();
+        }
+    }
+
 
     </script>
-</body>
 </html>
-
