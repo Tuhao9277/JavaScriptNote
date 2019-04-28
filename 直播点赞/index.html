@@ -68,7 +68,8 @@
                 this.x+= this.speed;
                 this.el.style.right= this.y +50+"px";
                 this.el.style.bottom =this.x+"px";
-                if( this.el.style.top<0){
+                console.log(this.el.offsetTop);
+                if(this.el.offsetTop<0){
                     this.stop();
                 }
             }.bind(this), 30)
@@ -76,11 +77,8 @@
         },
         stop :function(){
             clearInterval(this.timer);
-            this.ele.remove();
+            this.el.remove();
         }
-       
-
-
     }
 
 </script>
