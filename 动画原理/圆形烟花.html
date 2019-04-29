@@ -93,14 +93,14 @@
 
         .spark {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
             opacity: 1;
         }
     </style>
     <script src="../../common.js"></script>
-    <script src="animate.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../animate.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         document.onclick = function (evt) {
             var e = evt || event;
@@ -112,16 +112,17 @@
             document.body.appendChild(fire); // 使用document.body 向其中添加fire
             animate(fire, { top: e.clientY, height: 3 }, function () {
                 fire.remove();
-                
                 var count =  20;
                 // 每一块碎片对应的角度
                 var avd= 360/count;
+                var flag = document.createDocumentFragment();
+                for (var i = 0; i < count; i++) {
+                      
+               
                 // 半径
                 var radius = 200;
                 // 烟花碎片对应的弧度
                 var ahd = avd *Math.PI/180;
-                var flag = document.createDocumentFragment();
-                for (var i = 0; i < count; i++) {
                     var spark = document.createElement("div");
                     spark.className = "spark";
                     spark.style.backgroundColor = randomColor();
@@ -133,18 +134,18 @@
                     flag.appendChild(spark);
                    
                    
-                    animate(spark,{left:speedx+e.clientX,top:speedy+e.clientY},function(){
-                        this.remove();
-                    })
-                    // var t = setInterval(function () {
-                    //     spark.style.left = spark.offsetLeft + speedx + "px";
-                    //     spark.style.top = spark.offsetTop + speedy + "px";
+                    // animate(spark,{left:0},function(){
+                    //     // this.remove();
+                    // })
+                    var t = setInterval(function () {
+                        spark.style.left = spark.offsetLeft + speedx + "px";
+                        spark.style.top = spark.offsetTop + speedy + "px";
                  
-                    //     if (spark.offsetTop >= window.innerHeight || spark.offsetTop<0 || spark.offsetLeft<0 || spark.offsetLeft>1920) {
-                    //         clearInterval(t);
-                    //         spark.remove();
-                    //     }
-                    // }, 30)
+                        if (spark.offsetTop >= window.innerHeight || spark.offsetTop<0 || spark.offsetLeft<0 || spark.offsetLeft>1920) {
+                            clearInterval(t);
+                            spark.remove();
+                        }
+                    }, 30)
 
                 }
                 document.body.appendChild(flag);
