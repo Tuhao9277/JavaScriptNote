@@ -1,0 +1,2 @@
+ { id: "editInfo", pid: "studentInfo", text: "修改资料", iconCls: "icon-edit", url: "http://www.baidu.com" },
+ { id: "editPass", pid: "studentInfo", text: "修改密码", iconCls: "icon-edit", url: "http://www.renren.com" },
